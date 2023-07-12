@@ -1,0 +1,33 @@
+{
+	"name": "app-template",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"build": "babel src --out-dir dist --extensions .ts,.tsx,.js,.jsx",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"lint": "eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx .",
+		"prettier": "prettier --ignore-path .gitignore \"**/*.+(js|json|jsx|ts|tsx)\"",
+		"format": "npm run prettier -- --write",
+		"check-format": "npm run prettier -- --list-different",
+		"check-types": "tsc",
+		"validate": "npm run check-types && npm run check-format && npm run lint && npm run build",
+		"prepare": "husky install"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@babel/cli": "^7.22.9",
+		"@babel/core": "^7.22.9",
+		"@babel/preset-env": "^7.22.9",
+		"@babel/preset-typescript": "^7.22.5",
+		"@typescript-eslint/eslint-plugin": "^6.0.0",
+		"@typescript-eslint/parser": "^6.0.0",
+		"eslint": "^8.44.0",
+		"eslint-config-prettier": "^8.8.0",
+		"husky": "^8.0.3",
+		"lint-staged": "^13.2.3",
+		"prettier": "^3.0.0",
+		"typescript": "^5.1.6"
+	}
+}
