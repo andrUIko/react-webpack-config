@@ -1,6 +1,10 @@
 {
 	"compilerOptions": {
 		"baseUrl": "./src",
-		"noEmit": true
+		"noEmit": true,
+		"strictNullChecks": true,
+		"jsx": "react-jsx",
+		"plugins": [{ "name": "typescript-plugin-css-modules" }],
+		"allowImportingTsExtensions": true
 	}
 }
