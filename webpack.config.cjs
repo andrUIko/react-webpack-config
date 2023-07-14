@@ -1,5 +1,9 @@
 const path = require("node:path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+
+const isDevelopment = process.env.NODE_ENV !== "production";
 
 module.exports = {
 	entry: "./src/index.tsx",
@@ -8,8 +12,10 @@ module.exports = {
 		filename: "bundle.js",
 	},
 	resolve: {
-		modules: ["node_modules", path.join(__dirname, "src"), "shared"],
+		modules: ["node_modules", path.join(__dirname, "src")],
 	},
+	mode: isDevelopment ? "development" : "production",
+
 	module: {
 		rules: [
 			{
@@ -32,7 +38,17 @@ module.exports = {
 			{
 				test: /\.(js|jsx|ts|tsx)$/,
 				exclude: /node_modules/,
-				use: "babel-loader",
+				use: [
+					{
+						loader: "babel-loader",
+						options: {
+							plugins: [
+								isDevelopment &&
+									require.resolve("react-refresh/babel"),
+							].filter(Boolean),
+						},
+					},
+				],
 			},
 			{
 				test: /\.(eot|svg|ttf|woff|woff2)$/,
@@ -55,5 +71,14 @@ module.exports = {
 			filename: "index.html",
 			inject: "body",
 		}),
-	],
+		new ForkTsCheckerWebpackPlugin({
+			typescript: {
+				diagnosticOptions: {
+					semantic: true,
+					syntactic: true,
+				},
+			},
+		}),
+		isDevelopment && new ReactRefreshWebpackPlugin(),
+	].filter(Boolean),
 };

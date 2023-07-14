@@ -1,10 +1,17 @@
-import * as React from "react";
 import style from "./App.module.css";
+import Body from "./Body.tsx";
+import Button from "./Button.tsx";
+import { useState } from "react";
 
 const App: React.FC = () => {
-	const [count, setCount] = React.useState(0);
+	const [isOpen, setIsOpen] = useState(false);
 
-	return <div className={style.Container}>{count}</div>;
+	return (
+		<div className={style.Container}>
+			<Button onClick={() => setIsOpen(!isOpen)}>Click</Button>
+			{isOpen && <Body />}
+		</div>
+	);
 };
 
 export default App;
