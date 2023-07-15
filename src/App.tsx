@@ -1,4 +1,4 @@
-import style from "./App.module.css";
+import style from "./App.module.scss";
 import Body from "./Body.tsx";
 import Button from "./Button.tsx";
 import { useState } from "react";

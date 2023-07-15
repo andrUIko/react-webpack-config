@@ -2,9 +2,12 @@
 	"compilerOptions": {
 		"baseUrl": "./src",
 		"noEmit": true,
+		"strict": true,
 		"strictNullChecks": true,
-		"jsx": "react-jsx",
+		"jsx": "preserve",
 		"plugins": [{ "name": "typescript-plugin-css-modules" }],
-		"allowImportingTsExtensions": true
+		"allowImportingTsExtensions": true,
+		"module": "ESNext",
+		"moduleResolution": "NodeNext"
 	}
 }
