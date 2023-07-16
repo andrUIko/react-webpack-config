@@ -2,6 +2,7 @@ const path = require("node:path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (_, argv) => {
 	const isDevelopment = argv.mode !== "production";
@@ -24,17 +25,28 @@ module.exports = (_, argv) => {
 					test: /\.css$/,
 					exclude: /\.module\.css$/,
 					use: [
-						{ loader: require.resolve("style-loader") },
+						{
+							loader: isDevelopment
+								? require.resolve("style-loader")
+								: MiniCssExtractPlugin.loader,
+						},
 						{ loader: require.resolve("css-loader") },
 					],
 				},
 				{
 					test: /\.module\.css$/,
 					use: [
-						{ loader: require.resolve("style-loader") },
+						{
+							loader: isDevelopment
+								? require.resolve("style-loader")
+								: MiniCssExtractPlugin.loader,
+						},
 						{
 							loader: require.resolve("css-loader"),
-							options: { modules: true },
+							options: {
+								modules: true,
+								sourceMap: isDevelopment,
+							},
 						},
 					],
 				},
@@ -42,21 +54,41 @@ module.exports = (_, argv) => {
 					test: /\.s[ac]ss$/i,
 					exclude: /\.module\.s[ac]ss$/,
 					use: [
-						{ loader: require.resolve("style-loader") },
-						{ loader: require.resolve("css-loader") },
-						{ loader: require.resolve("sass-loader") },
+						{
+							loader: isDevelopment
+								? require.resolve("style-loader")
+								: MiniCssExtractPlugin.loader,
+						},
+						{
+							loader: require.resolve("css-loader"),
+							options: {
+								sourceMap: isDevelopment,
+							},
+						},
+						{
+							loader: require.resolve("sass-loader"),
+							options: { sourceMap: isDevelopment },
+						},
 					],
 				},
 				{
 					test: /\.module\.s[ac]ss$/i,
 					use: [
-						{ loader: require.resolve("style-loader") },
+						{
+							loader: isDevelopment
+								? require.resolve("style-loader")
+								: MiniCssExtractPlugin.loader,
+						},
 						{
 							loader: require.resolve("css-loader"),
-							options: { modules: true },
+							options: {
+								modules: true,
+								sourceMap: isDevelopment,
+							},
 						},
 						{
 							loader: require.resolve("sass-loader"),
+							options: { sourceMap: isDevelopment },
 						},
 					],
 				},
@@ -85,7 +117,7 @@ module.exports = (_, argv) => {
 			static: {
 				directory: path.join(__dirname, "./public"),
 			},
-
+			hot: true,
 			compress: true,
 			port: 8080,
 			historyApiFallback: true,
@@ -106,6 +138,14 @@ module.exports = (_, argv) => {
 						},
 					},
 				}),
+			new MiniCssExtractPlugin({
+				filename: isDevelopment
+					? "[name].css"
+					: "[name].[fullhash].css",
+				chunkFilename: isDevelopment
+					? "[id].css"
+					: "[id].[fullhash].css",
+			}),
 		].filter(Boolean),
 	};
 };

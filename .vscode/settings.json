@@ -6,5 +6,31 @@
 	"typescript.preferences.importModuleSpecifierEnding": "js",
 	"typescript.suggest.paths": false,
 	"javascript.suggest.paths": false,
-	"path-intellisense.extensionOnImport": true
+	"typescript.validate.enable": false,
+	"javascript.validate.enable": false,
+	"path-intellisense.extensionOnImport": true,
+	"npm-intellisense.scanDevDependencies": true,
+	"[javascript]": {
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true
+		}
+	},
+
+	"[javascriptreact]": {
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true
+		}
+	},
+
+	"[typescript]": {
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true
+		}
+	},
+
+	"[typescriptreact]": {
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true
+		}
+	}
 }
