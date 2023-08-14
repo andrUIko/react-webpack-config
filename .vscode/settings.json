@@ -9,6 +9,7 @@
 	"typescript.validate.enable": false,
 	"javascript.validate.enable": false,
 	"path-intellisense.extensionOnImport": true,
+	"path-intellisense.autoTriggerNextSuggestion": true,
 	"npm-intellisense.scanDevDependencies": true,
 	"[javascript]": {
 		"editor.codeActionsOnSave": {

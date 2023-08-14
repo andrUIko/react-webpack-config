@@ -3,6 +3,8 @@ const HTMLWebpackPlugin = require("html-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const BundleAnalyzerPlugin =
+	require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = (_, argv) => {
 	const isDevelopment = argv.mode !== "production";
@@ -121,6 +123,7 @@ module.exports = (_, argv) => {
 			compress: true,
 			port: 8080,
 			historyApiFallback: true,
+			open: true,
 		},
 		plugins: [
 			new HTMLWebpackPlugin({
@@ -128,16 +131,6 @@ module.exports = (_, argv) => {
 				filename: "index.html",
 				inject: "body",
 			}),
-			isDevelopment && new ReactRefreshWebpackPlugin(),
-			isDevelopment &&
-				new ForkTsCheckerWebpackPlugin({
-					typescript: {
-						diagnosticOptions: {
-							semantic: true,
-							syntactic: true,
-						},
-					},
-				}),
 			new MiniCssExtractPlugin({
 				filename: isDevelopment
 					? "[name].css"
@@ -145,6 +138,22 @@ module.exports = (_, argv) => {
 				chunkFilename: isDevelopment
 					? "[id].css"
 					: "[id].[fullhash].css",
+			}),
+			...(isDevelopment
+				? [
+						new ReactRefreshWebpackPlugin(),
+						new ForkTsCheckerWebpackPlugin({
+							typescript: {
+								diagnosticOptions: {
+									semantic: true,
+									syntactic: true,
+								},
+							},
+						}),
+				  ]
+				: []),
+			new BundleAnalyzerPlugin({
+				analyzerMode: isDevelopment ? "server" : "static",
 			}),
 		].filter(Boolean),
 	};

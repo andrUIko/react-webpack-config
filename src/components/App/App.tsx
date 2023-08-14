@@ -1,6 +1,6 @@
 import style from "./App.module.scss";
-import Body from "./Body.tsx";
-import Button from "./Button.tsx";
+import Body from "../Body/Body.tsx";
+import Button from "../Button/Button.tsx";
 import { useState } from "react";
 
 const App: React.FC = () => {

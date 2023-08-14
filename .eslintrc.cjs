@@ -63,5 +63,20 @@ module.exports = {
 				node: true,
 			},
 		},
+		{
+			files: ["**/__tests__/**/*", "*.(spec|test).{js,jsx,ts,tsx}"],
+			plugins: ["jest"],
+			extends: ["plugin:jest/recommended"],
+			rules: {
+				"jest/no-disabled-tests": "warn",
+				"jest/no-focused-tests": "error",
+				"jest/no-identical-title": "error",
+				"jest/prefer-to-have-length": "warn",
+				"jest/valid-expect": "error",
+			},
+			env: {
+				"jest/globals": true,
+			},
+		},
 	],
 };

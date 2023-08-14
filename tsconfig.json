@@ -9,5 +9,6 @@
 		"allowImportingTsExtensions": true,
 		"module": "ESNext",
 		"moduleResolution": "NodeNext"
-	}
+	},
+	"exclude": ["node_modules", "dist"]
 }
