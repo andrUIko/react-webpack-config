@@ -8,11 +8,11 @@
 	"typescript.preferences.importModuleSpecifierEnding": "js",
 	"typescript.suggest.paths": false,
 	"javascript.suggest.paths": false,
-	"typescript.validate.enable": false,
-	"javascript.validate.enable": false,
+
 	"path-intellisense.extensionOnImport": true,
 	"path-intellisense.autoTriggerNextSuggestion": true,
 	"npm-intellisense.scanDevDependencies": true,
+
 	"[javascript]": {
 		"editor.codeActionsOnSave": {
 			"source.fixAll.eslint": true

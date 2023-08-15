@@ -6,9 +6,13 @@ import { useState } from "react";
 const App: React.FC = () => {
 	const [isOpen, setIsOpen] = useState(false);
 
+	const handleClick = () => {
+		setIsOpen(!isOpen);
+	};
+
 	return (
 		<div className={styles.Container}>
-			<Button onClick={() => setIsOpen(!isOpen)}>Click</Button>
+			<Button onClick={handleClick}>Click</Button>
 			{isOpen && <Body />}
 		</div>
 	);

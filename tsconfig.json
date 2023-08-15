@@ -1,5 +1,9 @@
 {
 	"compilerOptions": {
+		// superseded by .eslintrc.cjs
+		"noUnusedLocals": false,
+		// superseded by .eslintrc.cjs
+		"noUnusedParameters": false,
 		"baseUrl": "./src",
 		"noEmit": true,
 		"strict": true,
@@ -10,5 +14,6 @@
 		"module": "ESNext",
 		"moduleResolution": "NodeNext"
 	},
+	"include": ["src/**/*"],
 	"exclude": ["node_modules", "dist"]
 }
