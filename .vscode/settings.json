@@ -1,6 +1,8 @@
 {
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"editor.formatOnSave": true,
+	// to enable css/sass modules autocomplete select project's TS version
+	// for details see https://code.visualstudio.com/docs/typescript/typescript-compiling#_using-the-workspace-version-of-typescript
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"typescript.preferences.importModuleSpecifier": "relative",
 	"typescript.preferences.importModuleSpecifierEnding": "js",

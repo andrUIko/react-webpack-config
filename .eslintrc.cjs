@@ -58,13 +58,16 @@ module.exports = {
 			},
 		},
 		{
-			files: ["webpack.config.cjs", ".eslintrc.cjs"],
+			files: ["*.config.cjs", ".eslintrc.cjs"],
 			env: {
 				node: true,
 			},
 		},
 		{
-			files: ["**/__tests__/**/*", "*.(spec|test).{js,jsx,ts,tsx}"],
+			files: [
+				"**/__tests__/*.+(ts|tsx|js|jsx)",
+				"*.+(spec|test).{js,jsx,ts,tsx}",
+			],
 			plugins: ["jest"],
 			extends: ["plugin:jest/recommended"],
 			rules: {
