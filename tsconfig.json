@@ -4,16 +4,25 @@
 		"noUnusedLocals": false,
 		// superseded by .eslintrc.cjs
 		"noUnusedParameters": false,
-		"baseUrl": "./src",
+		"baseUrl": "./",
+		"paths": {
+			"*": ["src/*", "test/*"]
+		},
 		"noEmit": true,
 		"strict": true,
 		"strictNullChecks": true,
 		"jsx": "preserve",
-		"plugins": [{ "name": "typescript-plugin-css-modules" }],
+		"plugins": [
+			{
+				"name": "typescript-plugin-css-modules",
+				"options": { "classnameTransform": "camelCaseOnly" }
+			}
+		],
 		"allowImportingTsExtensions": true,
 		"module": "ESNext",
-		"moduleResolution": "NodeNext"
+		"moduleResolution": "NodeNext",
+		"allowSyntheticDefaultImports": true
 	},
-	"include": ["src/**/*"],
+	"include": ["src/**/*", "test/**/*"],
 	"exclude": ["node_modules", "dist"]
 }

@@ -1,3 +1,4 @@
+/** @type {import('eslint').Linter.ConfigOverride} */
 module.exports = {
 	files: [
 		"**/__tests__/*.+(ts|tsx|js|jsx)",
@@ -14,5 +15,10 @@ module.exports = {
 	},
 	env: {
 		"jest/globals": true,
+	},
+	settings: {
+		jest: {
+			jestConfigFile: "./jest.config.cjs",
+		},
 	},
 };

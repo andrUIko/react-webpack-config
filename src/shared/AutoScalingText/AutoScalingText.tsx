@@ -25,7 +25,7 @@ const AutoScalingText: React.FC<AutoScalingTextProps> = ({ children }) => {
 
 	return (
 		<div
-			className={styles.AutoScalingText}
+			className={styles.autoScalingText}
 			data-testid="total"
 			style={{ transform: `scale(${scale},${scale})` }}
 			ref={ref}>

@@ -1,6 +1,7 @@
 const jestConfig = require("./.eslintrc.jest.cjs");
 const typescriptConfig = require("./.eslintrc.typescript.cjs");
 
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
 	parserOptions: {
 		ecmaVersion: "latest",
@@ -11,10 +12,16 @@ module.exports = {
 	},
 	root: true,
 	ignorePatterns: ["dist/**/*"],
-	extends: ["eslint:recommended", "eslint-config-prettier"],
+	extends: [
+		"eslint:recommended",
+		"eslint-config-prettier",
+		"plugin:import/recommended",
+	],
 	rules: {
 		strict: ["error", "never"],
+		"import/export": "off",
 	},
+	plugins: ["import"],
 	env: {
 		browser: true,
 	},

@@ -1,3 +1,4 @@
+/** @type {import('eslint').Linter.ConfigOverride} */
 module.exports = {
 	files: ["*.+(ts|tsx)"],
 	parser: "@typescript-eslint/parser",
@@ -20,7 +21,14 @@ module.exports = {
 	rules: {
 		"valid-typeof": "off",
 		"no-unused-vars": "off",
-		"@typescript-eslint/no-unused-vars": "error",
+		"@typescript-eslint/no-unused-vars": [
+			"error",
+			{
+				argsIgnorePattern: "^_",
+				destructuredArrayIgnorePattern: "^_",
+				varsIgnorePattern: "^_",
+			},
+		],
 		"import/newline-after-import": "warn",
 		"padding-line-between-statements": "off",
 		"@typescript-eslint/padding-line-between-statements": [

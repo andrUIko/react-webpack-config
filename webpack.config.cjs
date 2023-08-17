@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const BundleAnalyzerPlugin =
 	require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
+/** @returns {import('webpack').Configuration} */
 module.exports = (_, argv) => {
 	const isDevelopment = argv.mode !== "production";
 
@@ -46,7 +47,9 @@ module.exports = (_, argv) => {
 						{
 							loader: require.resolve("css-loader"),
 							options: {
-								modules: true,
+								modules: {
+									exportLocalsConvention: "camelCaseOnly",
+								},
 								sourceMap: isDevelopment,
 							},
 						},
@@ -84,7 +87,9 @@ module.exports = (_, argv) => {
 						{
 							loader: require.resolve("css-loader"),
 							options: {
-								modules: true,
+								modules: {
+									exportLocalsConvention: "camelCaseOnly",
+								},
 								sourceMap: isDevelopment,
 							},
 						},

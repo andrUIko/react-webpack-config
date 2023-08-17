@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render } from "test-utils";
 import CalculatorDisplay from "../CalculatorDisplay/CalculatorDisplay.tsx";
 
 test("renders", () => {
@@ -8,7 +8,7 @@ test("renders", () => {
 		  style="position: relative; color: white; background: rgb(28, 25, 28); line-height: 130px; font-size: 6em; flex: 1;"
 		>
 		  <div
-		    class="AutoScalingText"
+		    class="autoScalingText"
 		    data-testid="total"
 		    style="transform: scale(1,1);"
 		  >
