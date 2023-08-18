@@ -5,6 +5,7 @@ const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin"
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const BundleAnalyzerPlugin =
 	require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const { ProgressPlugin } = require("webpack");
 
 /** @returns {import('webpack').Configuration} */
 module.exports = (_, argv) => {
@@ -115,11 +116,15 @@ module.exports = (_, argv) => {
 					],
 				},
 				{
-					test: /\.(eot|svg|ttf|woff|woff2)$/,
-					use: require.resolve("file-loader"),
+					test: /\.(woff|woff2|eot|ttf|otf)$/i,
+					type: "asset/resource",
+					generator: {
+						filename: "assets/fonts/[name][ext]",
+					},
 				},
 			],
 		},
+		devtool: isDevelopment ? "inline-source-map" : false,
 		devServer: {
 			static: {
 				directory: path.join(__dirname, "./public"),
@@ -144,6 +149,7 @@ module.exports = (_, argv) => {
 					? "[id].css"
 					: "[id].[fullhash].css",
 			}),
+			new ProgressPlugin(),
 			...(isDevelopment
 				? [
 						new ReactRefreshWebpackPlugin(),
@@ -158,7 +164,7 @@ module.exports = (_, argv) => {
 				  ]
 				: []),
 			new BundleAnalyzerPlugin({
-				analyzerMode: isDevelopment ? "server" : "static",
+				analyzerMode: "json",
 			}),
 		].filter(Boolean),
 	};
