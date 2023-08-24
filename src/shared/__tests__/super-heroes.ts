@@ -1,4 +1,4 @@
-import { getFlyingSuperheroes } from "../super-heroes.ts";
+import { getFlyingSuperheroes } from "shared/super-heroes.ts";
 
 const flyingSuperheroes = [
 	{

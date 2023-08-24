@@ -1,10 +1,10 @@
 import styles from "./App.module.scss";
-import Body from "../Body/Body.tsx";
-import Button from "../Button/Button.tsx";
 import { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
-import { darkTheme } from "../../styles/themes.tsx";
+import { darkTheme } from "styles/themes.tsx";
+import Body from "components/Body/Body.tsx";
+import Button from "components/Button/Button.tsx";
 
 const App: React.FC = () => {
 	const [isOpen, setIsOpen] = useState(false);

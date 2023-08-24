@@ -6,6 +6,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const BundleAnalyzerPlugin =
 	require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const { ProgressPlugin } = require("webpack");
+const CompressionPlugin = require("compression-webpack-plugin");
+const zlib = require("zlib");
 
 /** @returns {import('webpack').Configuration} */
 module.exports = (_, argv) => {
@@ -13,10 +15,12 @@ module.exports = (_, argv) => {
 
 	return {
 		entry: "./src/index.tsx",
+
 		output: {
 			path: path.resolve("dist"),
-			filename: "bundle.js",
+			filename: "[name].[fullhash].js",
 		},
+
 		resolve: {
 			modules: ["node_modules", path.join(__dirname, "src")],
 		},
@@ -152,7 +156,9 @@ module.exports = (_, argv) => {
 			new ProgressPlugin(),
 			...(isDevelopment
 				? [
-						new ReactRefreshWebpackPlugin(),
+						new ReactRefreshWebpackPlugin({
+							overlay: false,
+						}),
 						new ForkTsCheckerWebpackPlugin({
 							typescript: {
 								diagnosticOptions: {
@@ -163,6 +169,20 @@ module.exports = (_, argv) => {
 						}),
 				  ]
 				: []),
+			!isDevelopment &&
+				new CompressionPlugin({
+					filename: "[path][base].br",
+					algorithm: "brotliCompress",
+					test: /\.(js|css|html|svg)$/,
+					compressionOptions: {
+						params: {
+							[zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+						},
+					},
+					threshold: 10240,
+					minRatio: 0.8,
+					deleteOriginalAssets: false,
+				}),
 			new BundleAnalyzerPlugin({
 				analyzerMode: "json",
 			}),

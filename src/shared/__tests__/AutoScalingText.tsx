@@ -1,5 +1,5 @@
-import { render } from "@testing-library/react";
-import AutoScalingText from "../AutoScalingText/AutoScalingText.tsx";
+import AutoScalingText from "shared/AutoScalingText/AutoScalingText.tsx";
+import { render } from "test-utils.tsx";
 
 test("renders", () => {
 	const {

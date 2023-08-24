@@ -1,5 +1,5 @@
-import { render } from "test-utils";
-import CalculatorDisplay from "../CalculatorDisplay/CalculatorDisplay.tsx";
+import CalculatorDisplay from "shared/CalculatorDisplay/CalculatorDisplay.tsx";
+import { render } from "test-utils.tsx";
 
 test("renders", () => {
 	const { container } = render(<CalculatorDisplay value="0" />);

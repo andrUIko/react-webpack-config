@@ -1,6 +1,6 @@
-import { fireEvent, render } from "@testing-library/react";
-import Calculator from "../Calculator/Calculator.tsx";
+import { fireEvent, render } from "test-utils.tsx";
 import "@testing-library/jest-dom";
+import Calculator from "shared/Calculator/Calculator.tsx";
 
 test("the clear button switches from AC to C when there is an entry", () => {
 	const { getByText } = render(<Calculator />);

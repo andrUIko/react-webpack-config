@@ -1,27 +1,29 @@
 {
 	"compilerOptions": {
 		// superseded by .eslintrc.cjs
-		"noUnusedLocals": false,
+		"allowImportingTsExtensions": true,
 		// superseded by .eslintrc.cjs
-		"noUnusedParameters": false,
+		"allowSyntheticDefaultImports": true,
 		"baseUrl": "./",
+		"jsx": "preserve",
+		"module": "ESNext",
+		"moduleResolution": "NodeNext",
+		"noEmit": true,
+		"noUnusedLocals": false,
+		"noUnusedParameters": false,
 		"paths": {
 			"*": ["src/*", "test/*"]
 		},
-		"noEmit": true,
-		"strict": true,
-		"strictNullChecks": true,
-		"jsx": "preserve",
 		"plugins": [
 			{
 				"name": "typescript-plugin-css-modules",
-				"options": { "classnameTransform": "camelCaseOnly" }
+				"options": {
+					"classnameTransform": "camelCaseOnly"
+				}
 			}
 		],
-		"allowImportingTsExtensions": true,
-		"module": "ESNext",
-		"moduleResolution": "NodeNext",
-		"allowSyntheticDefaultImports": true
+		"strict": true,
+		"strictNullChecks": true
 	},
 	"include": ["src/**/*", "test/**/*"],
 	"exclude": ["node_modules", "dist"]

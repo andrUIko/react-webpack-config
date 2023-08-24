@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useReducer } from "react";
 import styles from "./Calculator.module.scss";
-import CalculatorDisplay from "../CalculatorDisplay/CalculatorDisplay.tsx";
+import CalculatorDisplay from "shared/CalculatorDisplay/CalculatorDisplay.tsx";
 
 const CalculatorOperations: Record<
 	string,

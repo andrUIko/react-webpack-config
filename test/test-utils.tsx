@@ -1,9 +1,9 @@
 import { StrictMode } from "react";
-import { darkTheme } from "../src/styles/themes.tsx";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import * as rtl from "@testing-library/react";
 import type { Theme } from "@mui/material";
+import { darkTheme } from "styles/themes.tsx";
 
 interface WrapperProps {
 	children: React.ReactNode;
@@ -13,19 +13,16 @@ type RenderOptions = rtl.RenderOptions & { theme?: Theme; path?: string };
 
 export * from "@testing-library/react";
 
-export const render = (ui: React.ReactElement, options?: RenderOptions) => {
+export const render = (
+	ui: React.ReactElement,
+	{ theme, path, ...options }: RenderOptions = {}
+) => {
 	const Wrapper: React.FC<WrapperProps> = ({ children }) => {
-		const theme = options?.theme ?? darkTheme;
-		const path = options?.path ?? "/";
-
-		delete options?.theme;
-		delete options?.path;
-
 		const router = createBrowserRouter([
 			{
-				path: path,
+				path: path ?? "/",
 				element: (
-					<ThemeProvider theme={theme}>
+					<ThemeProvider theme={theme ?? darkTheme}>
 						<CssBaseline />
 						{children}
 					</ThemeProvider>

@@ -4,13 +4,10 @@
 	// to enable css/sass modules autocomplete select project's TS version
 	// for details see https://code.visualstudio.com/docs/typescript/typescript-compiling#_using-the-workspace-version-of-typescript
 	"typescript.tsdk": "node_modules/typescript/lib",
-	"typescript.preferences.importModuleSpecifier": "relative",
+	"typescript.preferences.importModuleSpecifier": "non-relative",
 	"typescript.preferences.importModuleSpecifierEnding": "js",
-	"typescript.suggest.paths": false,
-	"javascript.suggest.paths": false,
+	"typescript.suggest.paths": true,
 
-	"path-intellisense.extensionOnImport": true,
-	"path-intellisense.autoTriggerNextSuggestion": true,
 	"npm-intellisense.scanDevDependencies": true,
 
 	"[javascript]": {
