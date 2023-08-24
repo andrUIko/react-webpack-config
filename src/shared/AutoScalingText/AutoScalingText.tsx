@@ -22,7 +22,6 @@ const AutoScalingText: React.FC<AutoScalingTextProps> = ({ children }) => {
 	const ref = useRef<HTMLDivElement>(null);
 
 	const scale = getScale(ref.current);
-
 	return (
 		<div
 			className={styles.autoScalingText}

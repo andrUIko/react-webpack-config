@@ -26,11 +26,6 @@ const superheroes: Superhero[] = [
 	},
 ];
 
-/**
-+ * Filters the superheroes array to return only the superheroes that have the power to fly.
-+ *
-+ * @return {Array} An array of superheroes that can fly.
-+ */
 const getFlyingSuperheroes = () => {
 	return superheroes.filter((hero) => hero.powers.includes("fly"));
 };

@@ -1,4 +1,4 @@
-import App from "./components/App/App.tsx";
+import App from "components/App/App.tsx";
 import { createRoot } from "react-dom/client";
 import "@total-typescript/ts-reset";
 import { StrictMode } from "react";

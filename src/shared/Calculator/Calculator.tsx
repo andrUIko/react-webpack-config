@@ -10,7 +10,7 @@ const CalculatorOperations: Record<
 	"*": (prevValue, nextValue) => prevValue * nextValue,
 	"+": (prevValue, nextValue) => prevValue + nextValue,
 	"-": (prevValue, nextValue) => prevValue - nextValue,
-	"=": (prevValue, nextValue) => nextValue,
+	"=": (_prevValue, nextValue) => nextValue,
 };
 
 interface CalculatorKeyProps
