@@ -9,8 +9,12 @@ const { ProgressPlugin } = require("webpack");
 const CompressionPlugin = require("compression-webpack-plugin");
 const zlib = require("zlib");
 
-/** @returns {import('webpack').Configuration} */
-module.exports = (_, argv) => {
+/**
+ * @param {Partial<Object.<string, string|boolean>>} env
+ * @param {import('webpack-cli').Argv} argv
+ * @returns {import('webpack').Configuration}
+ * */
+module.exports = (env, argv) => {
 	const isDevelopment = argv.mode !== "production";
 
 	return {
@@ -19,6 +23,7 @@ module.exports = (_, argv) => {
 		output: {
 			path: path.resolve("dist"),
 			filename: "[name].[fullhash].js",
+			clean: true,
 		},
 
 		resolve: {
