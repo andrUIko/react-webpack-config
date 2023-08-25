@@ -10,9 +10,11 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const zlib = require("zlib");
 
 /**
- * @param {Partial<Object.<string, string|boolean>>} env
+ * @param {Partial<Record<string, string|boolean>>} env
  * @param {import('webpack-cli').Argv} argv
- * @returns {import('webpack').Configuration}
+ * @typedef {import('webpack').Configuration} Configuration
+ * @typedef {import('webpack-dev-server').Configuration} DevServerConfiguration
+ * @returns {Configuration & DevServerConfiguration}
  * */
 module.exports = (env, argv) => {
 	const isDevelopment = argv.mode !== "production";
