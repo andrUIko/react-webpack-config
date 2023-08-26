@@ -1,6 +1,6 @@
-const jestConfig = require("./.eslintrc.jest.cjs");
-const typescriptConfig = require("./.eslintrc.typescript.cjs");
-const configFilesConfig = require("./.eslintrc.configFiles.cjs");
+const jestOverride = require("./.eslintrc.jest.cjs");
+const typescriptOverride = require("./.eslintrc.typescript.cjs");
+const configFilesOverride = require("./.eslintrc.configFiles.cjs");
 
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
@@ -26,5 +26,5 @@ module.exports = {
 	env: {
 		browser: true,
 	},
-	overrides: [configFilesConfig, jestConfig, typescriptConfig],
+	overrides: [configFilesOverride, jestOverride, typescriptOverride],
 };
