@@ -8,6 +8,7 @@ const BundleAnalyzerPlugin =
 const { ProgressPlugin } = require("webpack");
 const CompressionPlugin = require("compression-webpack-plugin");
 const zlib = require("zlib");
+const devServer = require("./devserver.config.cjs");
 
 /**
  * @param {Partial<Record<string, string|boolean>>} env
@@ -45,23 +46,9 @@ module.exports = (env, argv) => {
 								? require.resolve("style-loader")
 								: MiniCssExtractPlugin.loader,
 						},
-						{ loader: require.resolve("css-loader") },
-					],
-				},
-				{
-					test: /\.module\.css$/,
-					use: [
-						{
-							loader: isDevelopment
-								? require.resolve("style-loader")
-								: MiniCssExtractPlugin.loader,
-						},
 						{
 							loader: require.resolve("css-loader"),
 							options: {
-								modules: {
-									exportLocalsConvention: "camelCaseOnly",
-								},
 								sourceMap: isDevelopment,
 							},
 						},
@@ -85,6 +72,25 @@ module.exports = (env, argv) => {
 						{
 							loader: require.resolve("sass-loader"),
 							options: { sourceMap: isDevelopment },
+						},
+					],
+				},
+				{
+					test: /\.module\.css$/,
+					use: [
+						{
+							loader: isDevelopment
+								? require.resolve("style-loader")
+								: MiniCssExtractPlugin.loader,
+						},
+						{
+							loader: require.resolve("css-loader"),
+							options: {
+								modules: {
+									exportLocalsConvention: "camelCaseOnly",
+								},
+								sourceMap: isDevelopment,
+							},
 						},
 					],
 				},
@@ -136,16 +142,7 @@ module.exports = (env, argv) => {
 			],
 		},
 		devtool: isDevelopment ? "inline-source-map" : false,
-		devServer: {
-			static: {
-				directory: path.join(__dirname, "./public"),
-			},
-			hot: true,
-			compress: true,
-			port: 8080,
-			historyApiFallback: true,
-			open: true,
-		},
+		devServer,
 		plugins: [
 			new HTMLWebpackPlugin({
 				template: path.resolve(__dirname, "public/template.html"),
