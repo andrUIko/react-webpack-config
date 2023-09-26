@@ -1,23 +1,23 @@
-const path = require("node:path");
-const HTMLWebpackPlugin = require("html-webpack-plugin");
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const BundleAnalyzerPlugin =
-	require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-const { ProgressPlugin } = require("webpack");
-const CompressionPlugin = require("compression-webpack-plugin");
-const zlib = require("zlib");
-const devServer = require("./devserver.config.cjs");
+import path from "node:path";
+import zlib from "node:zlib";
+import { ProgressPlugin } from "webpack";
+import HTMLWebpackPlugin from "html-webpack-plugin";
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
+import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
+import CompressionPlugin, { ZlibOptions } from "compression-webpack-plugin";
+import devServer from "./devserver.config.ts";
+import { type Configuration as DevServerConfiguration } from "webpack-dev-server";
+import { type Configuration } from "webpack";
+import { type Argv } from "webpack-cli";
 
-/**
- * @param {Partial<Record<string, string|boolean>>} env
- * @param {import('webpack-cli').Argv} argv
- * @typedef {import('webpack').Configuration} Configuration
- * @typedef {import('webpack-dev-server').Configuration} DevServerConfiguration
- * @returns {Configuration & DevServerConfiguration}
- * */
-module.exports = (env, argv) => {
+type WebpackConfig = (
+	env: Partial<Record<string, string | boolean>>,
+	argv: Argv
+) => Configuration & DevServerConfiguration;
+
+const webpackConfig: WebpackConfig = (env, argv) => {
 	const isDevelopment = argv.mode !== "production";
 
 	return {
@@ -182,7 +182,7 @@ module.exports = (env, argv) => {
 						params: {
 							[zlib.constants.BROTLI_PARAM_QUALITY]: 11,
 						},
-					},
+					} as ZlibOptions,
 					threshold: 10240,
 					minRatio: 0.8,
 					deleteOriginalAssets: false,
@@ -193,3 +193,5 @@ module.exports = (env, argv) => {
 		].filter(Boolean),
 	};
 };
+
+export default webpackConfig;
