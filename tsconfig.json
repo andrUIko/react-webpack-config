@@ -7,7 +7,7 @@
 		"baseUrl": "./",
 		"jsx": "preserve",
 		"module": "ESNext",
-		"moduleResolution": "NodeNext",
+		"moduleResolution": "Bundler",
 		"noEmit": true,
 		"noUnusedLocals": false,
 		"noUnusedParameters": false,
