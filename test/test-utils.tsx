@@ -4,6 +4,8 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import * as rtl from "@testing-library/react";
 import type { Theme } from "@mui/material";
 import { darkTheme } from "styles/themes.tsx";
+import { Provider } from "react-redux";
+import { store } from "store/rootStore.ts";
 
 interface WrapperProps {
 	children: React.ReactNode;
@@ -22,10 +24,12 @@ export const render = (
 			{
 				path: path ?? "/",
 				element: (
-					<ThemeProvider theme={theme ?? darkTheme}>
-						<CssBaseline />
-						{children}
-					</ThemeProvider>
+					<Provider store={store}>
+						<ThemeProvider theme={theme ?? darkTheme}>
+							<CssBaseline />
+							{children}
+						</ThemeProvider>
+					</Provider>
 				),
 			},
 		]);
