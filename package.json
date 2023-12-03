@@ -39,7 +39,7 @@
 		"compression-webpack-plugin": "^10.0.0",
 		"concurrently": "^8.2.0",
 		"css-loader": "^6.8.1",
-		"cypress": "^12.17.3",
+		"cypress": "^13.6.0",
 		"eslint": "^8.44.0",
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-import-resolver-jest": "^3.0.2",
