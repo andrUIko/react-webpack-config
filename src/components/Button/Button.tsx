@@ -13,4 +13,7 @@ const Button: React.FC<ButtonProps> = ({ onClick, children }) => {
 	);
 };
 
+const Test: React.FC = () => "test";
+console.log(Test);
+
 export default Button;

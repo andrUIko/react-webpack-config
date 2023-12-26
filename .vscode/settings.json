@@ -8,29 +8,9 @@
 	"typescript.preferences.importModuleSpecifierEnding": "js",
 	"typescript.suggest.paths": true,
 
-	"npm-intellisense.scanDevDependencies": true,
-
-	"[javascript]": {
+	"[javascript][javascriptreact][typescript][typescriptreact]": {
 		"editor.codeActionsOnSave": {
-			"source.fixAll.eslint": true
-		}
-	},
-
-	"[javascriptreact]": {
-		"editor.codeActionsOnSave": {
-			"source.fixAll.eslint": true
-		}
-	},
-
-	"[typescript]": {
-		"editor.codeActionsOnSave": {
-			"source.fixAll.eslint": true
-		}
-	},
-
-	"[typescriptreact]": {
-		"editor.codeActionsOnSave": {
-			"source.fixAll.eslint": true
+			"source.fixAll.eslint": "explicit"
 		}
 	}
 }
