@@ -7,7 +7,7 @@ const BundleAnalyzerPlugin =
 	require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const { ProgressPlugin } = require("webpack");
 const CompressionPlugin = require("compression-webpack-plugin");
-const zlib = require("zlib");
+const zlib = require("node:zlib");
 const devServer = require("./devserver.config.cjs");
 
 /**

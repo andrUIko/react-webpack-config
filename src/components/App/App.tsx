@@ -1,21 +1,17 @@
 import styles from "./App.module.scss";
-import { useState, Suspense, lazy } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
 import Body from "components/Body/Body.tsx";
-
-const Button = lazy(() => import("components/Button/Button.tsx"));
+import Button from "components/Button/Button.tsx";
+import { RootState } from "store/rootStore.ts";
+import { toggle } from "store/appSlice.ts";
 
 const App: React.FC = () => {
-	const [isOpen, setIsOpen] = useState(false);
+	const isOpen = useSelector((state: RootState) => state.app.isOpen);
+	const dispatch = useDispatch();
 
-	const handleClick = () => {
-		setIsOpen(!isOpen);
-	};
 	return (
 		<div className={styles.container}>
-			<Suspense fallback={<div>Loading...</div>}>
-				<Button onClick={handleClick}>Click</Button>
-			</Suspense>
+			<Button onClick={() => dispatch(toggle())}>Click</Button>
 			{isOpen && <Body />}
 		</div>
 	);
