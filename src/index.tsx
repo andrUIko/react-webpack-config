@@ -1,6 +1,6 @@
 import App from "components/App/App.tsx";
 import { createRoot } from "react-dom/client";
-import { StrictMode } from "react";
+import React, { StrictMode } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";

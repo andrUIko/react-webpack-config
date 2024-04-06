@@ -2,7 +2,7 @@ const path = require("node:path");
 
 /** @type {import('jest').Config} */
 module.exports = {
-	testEnvironment: "jest-environment-jsdom",
+	testEnvironment: "jsdom",
 	moduleNameMapper: {
 		"\\.(css|sass|scss)$": "identity-obj-proxy",
 	},

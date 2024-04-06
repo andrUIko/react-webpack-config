@@ -1,5 +1,5 @@
 import styles from "./App.module.scss";
-import { useState, Suspense, lazy } from "react";
+import React, { useState, Suspense, lazy } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { darkTheme } from "styles/themes.tsx";

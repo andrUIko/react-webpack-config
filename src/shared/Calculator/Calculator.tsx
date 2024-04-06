@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useReducer } from "react";
+import React, { Suspense, useEffect, useReducer } from "react";
 import styles from "./Calculator.module.scss";
 import CalculatorDisplay from "shared/CalculatorDisplay/CalculatorDisplay.tsx";
 
@@ -129,7 +129,7 @@ const Calculator: React.FC = () => {
 			});
 		} else if (operator) {
 			const currentValue = value || 0;
-			const newValue = CalculatorOperations[operator](
+			const newValue = CalculatorOperations[operator]?.(
 				currentValue,
 				inputValue
 			);

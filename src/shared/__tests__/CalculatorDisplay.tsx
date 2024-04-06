@@ -1,5 +1,6 @@
 import CalculatorDisplay from "shared/CalculatorDisplay/CalculatorDisplay.tsx";
 import { render } from "test-utils.tsx";
+import React from "react";
 
 test("renders", () => {
 	const { container } = render(<CalculatorDisplay value="0" />);

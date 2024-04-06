@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import styles from "./AutoScalingText.module.scss";
 
 interface AutoScalingTextProps {
@@ -7,6 +7,9 @@ interface AutoScalingTextProps {
 
 const getScale = (node: HTMLDivElement | null) => {
 	if (!node) return 1;
+
+	// eslint-disable-next-line no-debugger
+	debugger;
 	const parentNode = node.parentNode;
 	if (!(parentNode instanceof HTMLElement)) return 1;
 	if (Object.getPrototypeOf(parentNode) !== HTMLElement) return 1;
@@ -18,6 +21,7 @@ const getScale = (node: HTMLDivElement | null) => {
 	}
 	return 1;
 };
+
 const AutoScalingText: React.FC<AutoScalingTextProps> = ({ children }) => {
 	const ref = useRef<HTMLDivElement>(null);
 

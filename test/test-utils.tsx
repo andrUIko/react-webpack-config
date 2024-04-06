@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import React, { StrictMode } from "react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import * as rtl from "@testing-library/react";

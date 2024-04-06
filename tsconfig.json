@@ -1,14 +1,44 @@
 {
 	"compilerOptions": {
+		/* Base options */
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"target": "es2022",
+		"allowJs": true,
+		"resolveJsonModule": true,
+		"moduleDetection": "force",
+		"isolatedModules": true,
+
+		/* Strictness */
+		"strict": true,
+		"noUncheckedIndexedAccess": true,
+		"strictNullChecks": true,
+
+		/* If transpiling with TypeScript: */
+		// "module": "NodeNext",
+		// "outDir": "dist",
+		// "sourceMap": true,
+
+		/* AND if you're building for a library: */
+		// "declaration": true,
+
+		/* AND if you're building for a library in a monorepo: */
+		// "composite": true,
+		// "declarationMap": true,
+
+		/* If NOT transpiling with TypeScript: */
+		"module": "ES2022",
+		"noEmit": true,
+
+		"lib": ["dom", "dom.iterable", "esnext"],
+
 		// superseded by .eslintrc.cjs
 		"allowImportingTsExtensions": true,
 		// superseded by .eslintrc.cjs
 		"allowSyntheticDefaultImports": true,
 		"baseUrl": "./",
-		"jsx": "preserve",
-		"module": "ESNext",
+		"jsx": "react",
 		"moduleResolution": "Bundler",
-		"noEmit": true,
 		"noUnusedLocals": false,
 		"noUnusedParameters": false,
 		"paths": {
@@ -21,9 +51,7 @@
 					"classnameTransform": "camelCaseOnly"
 				}
 			}
-		],
-		"strict": true,
-		"strictNullChecks": true
+		]
 	},
 	"include": ["src/**/*", "test/**/*"],
 	"exclude": ["node_modules", "dist"]
