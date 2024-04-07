@@ -3,8 +3,8 @@ import { render } from "test-utils.tsx";
 import React from "react";
 
 test("renders", () => {
-	const { container } = render(<CalculatorDisplay value="0" />);
-	expect(container.firstChild).toMatchInlineSnapshot(`
+    const { container } = render(<CalculatorDisplay value="0" />);
+    expect(container.firstChild).toMatchInlineSnapshot(`
 		<div
 		  style="position: relative; color: white; background: rgb(28, 25, 28); line-height: 130px; font-size: 6em; flex: 1;"
 		>

@@ -8,17 +8,17 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 const router = createBrowserRouter([
-	{
-		path: "/",
-		element: <App />,
-	},
+    {
+        path: "/",
+        element: <App />,
+    },
 ]);
 
 const container = document.getElementById("root");
 
 if (container)
-	createRoot(container).render(
-		<StrictMode>
-			<RouterProvider router={router} />
-		</StrictMode>
-	);
+    createRoot(container).render(
+        <StrictMode>
+            <RouterProvider router={router} />
+        </StrictMode>
+    );

@@ -1,36 +1,36 @@
 {
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"editor.formatOnSave": true,
-	// to enable css/sass modules autocomplete select project's TS version
-	// for details see https://code.visualstudio.com/docs/typescript/typescript-compiling#_using-the-workspace-version-of-typescript
-	"typescript.tsdk": "node_modules/typescript/lib",
-	"typescript.preferences.importModuleSpecifier": "non-relative",
-	"typescript.preferences.importModuleSpecifierEnding": "js",
-	"typescript.suggest.paths": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    // to enable css/sass modules autocomplete select project's TS version
+    // for details see https://code.visualstudio.com/docs/typescript/typescript-compiling#_using-the-workspace-version-of-typescript
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "typescript.preferences.importModuleSpecifierEnding": "js",
+    "typescript.suggest.paths": true,
 
-	"npm-intellisense.scanDevDependencies": true,
+    "npm-intellisense.scanDevDependencies": true,
 
-	"[javascript]": {
-		"editor.codeActionsOnSave": {
-			"source.fixAll.eslint": "explicit"
-		}
-	},
+    "[javascript]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": "explicit"
+        }
+    },
 
-	"[javascriptreact]": {
-		"editor.codeActionsOnSave": {
-			"source.fixAll.eslint": "explicit"
-		}
-	},
+    "[javascriptreact]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": "explicit"
+        }
+    },
 
-	"[typescript]": {
-		"editor.codeActionsOnSave": {
-			"source.fixAll.eslint": "explicit"
-		}
-	},
+    "[typescript]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": "explicit"
+        }
+    },
 
-	"[typescriptreact]": {
-		"editor.codeActionsOnSave": {
-			"source.fixAll.eslint": "explicit"
-		}
-	}
+    "[typescriptreact]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": "explicit"
+        }
+    }
 }
