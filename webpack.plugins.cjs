@@ -49,7 +49,7 @@ const reactRefreshWebpackPlugin = () =>
     });
 
 const bundleAnalyzerPlugin = () =>
-    new BundleAnalyzerPlugin({ analyzerMode: "static" });
+    new BundleAnalyzerPlugin({ analyzerMode: "static", openAnalyzer: false });
 
 const htmlWebpackPlugin = () =>
     new HTMLWebpackPlugin({
