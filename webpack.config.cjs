@@ -1,14 +1,15 @@
 const path = require("node:path");
-const HTMLWebpackPlugin = require("html-webpack-plugin");
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const BundleAnalyzerPlugin =
-    require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-const CompressionPlugin = require("compression-webpack-plugin");
-const zlib = require("zlib");
 const devServer = require("./devserver.config.cjs");
-const WebpackBar = require("webpackbar");
+const {
+    compressionPlugin,
+    miniCssExtractPlugin,
+    webpackBarPlugin,
+    forkTsCheckerWebpackPlugin,
+    reactRefreshWebpackPlugin,
+    bundleAnalyzerPlugin,
+    htmlWebpackPlugin,
+} = require("./webpack.plugins.cjs");
 
 /**
  * @param {Partial<Record<string, string|boolean>>} env
@@ -34,7 +35,12 @@ module.exports = (env, argv) => {
         },
 
         mode: isDevelopment ? "development" : "production",
-
+        stats: {
+            assets: false,
+            chunks: false,
+            modules: false,
+            entrypoints: false,
+        },
         module: {
             rules: [
                 {
@@ -149,52 +155,18 @@ module.exports = (env, argv) => {
         devtool: isDevelopment ? "inline-source-map" : false,
         devServer,
         plugins: [
-            new HTMLWebpackPlugin({
-                template: path.resolve(__dirname, "public/template.html"),
-                filename: "index.html",
-                inject: "body",
-            }),
-            new MiniCssExtractPlugin({
-                filename: isDevelopment
-                    ? "[name].css"
-                    : "[name].[fullhash].css",
-                chunkFilename: isDevelopment
-                    ? "[id].css"
-                    : "[id].[fullhash].css",
-            }),
-            new WebpackBar(),
+            htmlWebpackPlugin(),
             ...(isDevelopment
                 ? [
-                      new ReactRefreshWebpackPlugin({
-                          overlay: false,
-                      }),
-                      new ForkTsCheckerWebpackPlugin({
-                          typescript: {
-                              diagnosticOptions: {
-                                  semantic: true,
-                                  syntactic: true,
-                              },
-                          },
-                      }),
+                      reactRefreshWebpackPlugin(),
+                      forkTsCheckerWebpackPlugin(),
+                      webpackBarPlugin(),
                   ]
-                : []),
-            !isDevelopment &&
-                new CompressionPlugin({
-                    filename: "[path][base].br",
-                    algorithm: "brotliCompress",
-                    test: /\.(js|css|html|svg)$/,
-                    compressionOptions: {
-                        params: {
-                            [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
-                        },
-                    },
-                    threshold: 10240,
-                    minRatio: 0.8,
-                    deleteOriginalAssets: false,
-                }),
-            new BundleAnalyzerPlugin({
-                analyzerMode: "json",
-            }),
-        ].filter(Boolean),
+                : [
+                      compressionPlugin(),
+                      bundleAnalyzerPlugin(),
+                      miniCssExtractPlugin(),
+                  ]),
+        ],
     };
 };
