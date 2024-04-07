@@ -5,8 +5,9 @@
     "scripts": {
         "build": "webpack --mode=production",
         "preview": "serve --no-clipboard --single --listen 8080 dist",
+        "__fix_jest": "./scripts/fix_jest.sh",
         "dev": "webpack-dev-server --mode=development",
-        "test": "jest --config ./configs/jest.config.ts",
+        "test": "npm run __fix_jest && jest --config ./configs/jest.config.ts",
         "test:watch": "npm run test -- --watch",
         "test:debug": "./scripts/test_debug.sh",
         "lint": "eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx,.cjs .",
@@ -73,7 +74,8 @@
         "webpack": "^5.88.1",
         "webpack-bundle-analyzer": "^4.9.0",
         "webpack-cli": "^5.1.4",
-        "webpack-dev-server": "^4.15.1"
+        "webpack-dev-server": "^4.15.1",
+        "webpackbar": "^6.0.1"
     },
     "dependencies": {
         "@babel/runtime": "^7.24.4",

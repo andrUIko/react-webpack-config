@@ -5,10 +5,10 @@ const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin"
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const BundleAnalyzerPlugin =
     require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-const { ProgressPlugin } = require("webpack");
 const CompressionPlugin = require("compression-webpack-plugin");
 const zlib = require("zlib");
 const devServer = require("./devserver.config.cjs");
+const WebpackBar = require("webpackbar");
 
 /**
  * @param {Partial<Record<string, string|boolean>>} env
@@ -162,7 +162,7 @@ module.exports = (env, argv) => {
                     ? "[id].css"
                     : "[id].[fullhash].css",
             }),
-            new ProgressPlugin(),
+            new WebpackBar(),
             ...(isDevelopment
                 ? [
                       new ReactRefreshWebpackPlugin({
