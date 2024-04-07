@@ -1,5 +1,4 @@
 const path = require("node:path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devServer = require("./devserver.config.cjs");
 const {
     compressionPlugin,
@@ -10,6 +9,14 @@ const {
     bundleAnalyzerPlugin,
     htmlWebpackPlugin,
 } = require("./webpack.plugins.cjs");
+const {
+    jsTsRules,
+    assetsRules,
+    cssRules,
+    sassRules,
+    cssModuleRules,
+    sassModuleRules,
+} = require("./webpack.rules.cjs");
 
 /**
  * @param {Partial<Record<string, string|boolean>>} env
@@ -43,130 +50,25 @@ module.exports = (env, argv) => {
         },
         module: {
             rules: [
-                {
-                    test: /\.css$/,
-                    exclude: /\.module\.css$/,
-                    use: [
-                        {
-                            loader: isDevelopment
-                                ? require.resolve("style-loader")
-                                : MiniCssExtractPlugin.loader,
-                        },
-                        {
-                            loader: require.resolve("css-loader"),
-                            options: {
-                                sourceMap: isDevelopment,
-                            },
-                        },
-                    ],
-                },
-                {
-                    test: /\.s[ac]ss$/i,
-                    exclude: /\.module\.s[ac]ss$/,
-                    use: [
-                        {
-                            loader: isDevelopment
-                                ? require.resolve("style-loader")
-                                : MiniCssExtractPlugin.loader,
-                        },
-                        {
-                            loader: require.resolve("css-loader"),
-                            options: {
-                                sourceMap: isDevelopment,
-                            },
-                        },
-                        {
-                            loader: require.resolve("sass-loader"),
-                            options: { sourceMap: isDevelopment },
-                        },
-                    ],
-                },
-                {
-                    test: /\.module\.css$/,
-                    use: [
-                        {
-                            loader: isDevelopment
-                                ? require.resolve("style-loader")
-                                : MiniCssExtractPlugin.loader,
-                        },
-                        {
-                            loader: require.resolve("css-loader"),
-                            options: {
-                                modules: {
-                                    exportLocalsConvention: "camelCaseOnly",
-                                },
-                                sourceMap: isDevelopment,
-                            },
-                        },
-                    ],
-                },
-                {
-                    test: /\.module\.s[ac]ss$/i,
-                    use: [
-                        {
-                            loader: isDevelopment
-                                ? require.resolve("style-loader")
-                                : MiniCssExtractPlugin.loader,
-                        },
-                        {
-                            loader: require.resolve("css-loader"),
-                            options: {
-                                modules: {
-                                    exportLocalsConvention: "camelCaseOnly",
-                                },
-                                sourceMap: isDevelopment,
-                            },
-                        },
-                        {
-                            loader: require.resolve("sass-loader"),
-                            options: { sourceMap: isDevelopment },
-                        },
-                    ],
-                },
-                {
-                    test: /\.(js|jsx|ts|tsx)$/,
-                    exclude: /node_modules/,
-                    use: [
-                        {
-                            loader: require.resolve("babel-loader"),
-                            options: {
-                                configFile: path.join(
-                                    __dirname,
-                                    "configs",
-                                    "babel.config.cjs"
-                                ),
-                                plugins: [
-                                    isDevelopment &&
-                                        require.resolve("react-refresh/babel"),
-                                ].filter(Boolean),
-                            },
-                        },
-                    ],
-                },
-                {
-                    test: /\.(woff|woff2|eot|ttf|otf)$/i,
-                    type: "asset/resource",
-                    generator: {
-                        filename: "assets/fonts/[name][ext]",
-                    },
-                },
+                jsTsRules(isDevelopment),
+                cssRules(isDevelopment),
+                sassRules(isDevelopment),
+                cssModuleRules(isDevelopment),
+                sassModuleRules(isDevelopment),
+                assetsRules(),
             ],
         },
         devtool: isDevelopment ? "inline-source-map" : false,
         devServer,
-        plugins: [
-            htmlWebpackPlugin(),
-            ...(isDevelopment
-                ? [
-                      reactRefreshWebpackPlugin(),
-                      forkTsCheckerWebpackPlugin(),
-                      webpackBarPlugin(),
-                  ]
+        plugins: [htmlWebpackPlugin()].concat(
+            isDevelopment
+                ? [reactRefreshWebpackPlugin(), forkTsCheckerWebpackPlugin()]
                 : [
                       compressionPlugin(),
                       bundleAnalyzerPlugin(),
                       miniCssExtractPlugin(),
-                  ]),
-        ],
+                      webpackBarPlugin(),
+                  ]
+        ),
     };
 };
