@@ -94,9 +94,9 @@ const jsTsRules = (isDevelopment) => ({
             options: {
                 configFile: path.join(__dirname, "configs", "babel.config.cjs"),
                 sourceMap: isDevelopment,
-                plugins: [
-                    isDevelopment && require.resolve("react-refresh/babel"),
-                ].filter(Boolean),
+                plugins: isDevelopment
+                    ? [require.resolve("react-refresh/babel")]
+                    : undefined,
             },
         },
     ],
