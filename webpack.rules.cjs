@@ -110,11 +110,11 @@ const assetsRules = () => ({
     },
 });
 
-module.exports = {
-    cssRules,
-    sassRules,
-    cssModuleRules,
-    sassModuleRules,
-    jsTsRules,
-    assetsRules,
-};
+module.exports = (isDevelopment) => ({
+    css: cssRules(isDevelopment),
+    sass: sassRules(isDevelopment),
+    cssModule: cssModuleRules(isDevelopment),
+    sassModule: sassModuleRules(isDevelopment),
+    jsTs: jsTsRules(isDevelopment),
+    assets: assetsRules(),
+});

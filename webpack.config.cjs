@@ -9,14 +9,22 @@ const {
     bundleAnalyzerPlugin,
     htmlWebpackPlugin,
 } = require("./webpack.plugins.cjs");
-const {
-    jsTsRules,
-    assetsRules,
-    cssRules,
-    sassRules,
-    cssModuleRules,
-    sassModuleRules,
-} = require("./webpack.rules.cjs");
+
+const makeRules = require("./webpack.rules.cjs");
+
+const commonPlugins = () => [htmlWebpackPlugin()];
+
+const devPlugins = () => [
+    reactRefreshWebpackPlugin(),
+    forkTsCheckerWebpackPlugin(),
+];
+
+const prodPlugins = () => [
+    compressionPlugin(),
+    bundleAnalyzerPlugin(),
+    miniCssExtractPlugin(),
+    webpackBarPlugin(),
+];
 
 /**
  * @param {Partial<Record<string, string|boolean>>} env
@@ -27,6 +35,8 @@ const {
  * */
 module.exports = (env, argv) => {
     const isDevelopment = argv.mode !== "production";
+    const rules = makeRules(isDevelopment);
+    const { jsTs, css, sass, cssModule, sassModule, assets } = rules;
 
     return {
         entry: "./src/index.tsx",
@@ -49,26 +59,13 @@ module.exports = (env, argv) => {
             entrypoints: false,
         },
         module: {
-            rules: [
-                jsTsRules(isDevelopment),
-                cssRules(isDevelopment),
-                sassRules(isDevelopment),
-                cssModuleRules(isDevelopment),
-                sassModuleRules(isDevelopment),
-                assetsRules(),
-            ],
+            rules: [jsTs, css, sass, cssModule, sassModule, assets],
         },
         devtool: isDevelopment ? "inline-source-map" : false,
         devServer,
-        plugins: [htmlWebpackPlugin()].concat(
-            isDevelopment
-                ? [reactRefreshWebpackPlugin(), forkTsCheckerWebpackPlugin()]
-                : [
-                      compressionPlugin(),
-                      bundleAnalyzerPlugin(),
-                      miniCssExtractPlugin(),
-                      webpackBarPlugin(),
-                  ]
-        ),
+        plugins: [
+            ...commonPlugins(),
+            ...(isDevelopment ? devPlugins() : prodPlugins()),
+        ],
     };
 };

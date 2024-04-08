@@ -13,6 +13,7 @@ const App: React.FC = () => {
     const handleClick = () => {
         setIsOpen(!isOpen);
     };
+
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />

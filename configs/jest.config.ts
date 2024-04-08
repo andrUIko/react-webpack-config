@@ -1,5 +1,6 @@
 import path from "node:path";
 import { JestConfigWithTsJest } from "ts-jest";
+import { defaults } from "ts-jest/presets";
 
 const config = {
     testEnvironment: "jsdom",
@@ -13,7 +14,9 @@ const config = {
         path.join(process.cwd(), "src"),
         path.join(process.cwd(), "test"),
     ],
-    preset: "ts-jest/presets/js-with-ts-esm",
+    transform: {
+        ...defaults.transform,
+    },
 } satisfies JestConfigWithTsJest;
 
 export default config;

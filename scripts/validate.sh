@@ -1,6 +1,5 @@
-#!/bin/sh
+#!/bin/bash
 
-./scripts/fix_jest.sh && \
 npx concurrently \
     -c blue,magenta,yellow \
     -n "tsc,prettier,eslint" \
