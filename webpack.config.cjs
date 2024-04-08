@@ -12,14 +12,14 @@ const {
 
 const makeRules = require("./webpack.rules.cjs");
 
-const commonPlugins = () => [htmlWebpackPlugin()];
+const commonPluginsFactory = () => [htmlWebpackPlugin()];
 
-const devPlugins = () => [
+const devPluginsFactory = () => [
     reactRefreshWebpackPlugin(),
     forkTsCheckerWebpackPlugin(),
 ];
 
-const prodPlugins = () => [
+const prodPluginsFactory = () => [
     compressionPlugin(),
     bundleAnalyzerPlugin(),
     miniCssExtractPlugin(),
@@ -55,7 +55,8 @@ module.exports = (env, argv) => {
         stats: {
             assets: false,
             chunks: false,
-            modules: false,
+            modules: true,
+            modulesSpace: 9,
             entrypoints: false,
         },
         module: {
@@ -64,8 +65,8 @@ module.exports = (env, argv) => {
         devtool: isDevelopment ? "inline-source-map" : false,
         devServer,
         plugins: [
-            ...commonPlugins(),
-            ...(isDevelopment ? devPlugins() : prodPlugins()),
+            ...commonPluginsFactory(),
+            ...(isDevelopment ? devPluginsFactory() : prodPluginsFactory()),
         ],
     };
 };

@@ -18,15 +18,17 @@ export const render = (
     { theme, path, ...options }: RenderOptions = {}
 ) => {
     const Wrapper: React.FC<WrapperProps> = ({ children }) => {
+        const TestComponent = () => (
+            <ThemeProvider theme={theme ?? darkTheme}>
+                <CssBaseline />
+                {children}
+            </ThemeProvider>
+        );
+
         const router = createBrowserRouter([
             {
                 path: path ?? "/",
-                element: (
-                    <ThemeProvider theme={theme ?? darkTheme}>
-                        <CssBaseline />
-                        {children}
-                    </ThemeProvider>
-                ),
+                element: <TestComponent />,
             },
         ]);
 

@@ -39,8 +39,6 @@
 
         /* superseded by .eslintrc.cjs */
         "allowImportingTsExtensions": true,
-        "noUnusedLocals": false,
-        "noUnusedParameters": false,
 
         "paths": {
             "*": ["src/*", "test/*"]
