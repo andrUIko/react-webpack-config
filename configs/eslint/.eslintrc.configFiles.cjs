@@ -1,6 +1,6 @@
 /** @type {import('eslint').Linter.ConfigOverride} */
 module.exports = {
-    files: ["*.cjs"],
+    files: ["./configs/babel.config.js", "*.cjs"],
     env: {
         node: true,
     },

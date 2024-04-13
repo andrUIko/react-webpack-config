@@ -1,6 +1,7 @@
-const path = require("node:path");
-const devServer = require("./devserver.config.cjs");
-const {
+import path from "node:path";
+import makeRules from "./webpack.rules.ts";
+import devServer from "./devserver.config.ts";
+import {
     compressionPlugin,
     miniCssExtractPlugin,
     webpackBarPlugin,
@@ -8,9 +9,13 @@ const {
     reactRefreshWebpackPlugin,
     bundleAnalyzerPlugin,
     htmlWebpackPlugin,
-} = require("./webpack.plugins.cjs");
+    /* to be places under "resolver" field */
+    tsconfigPathsWebpackPlugin,
+} from "./webpack.plugins.ts";
 
-const makeRules = require("./webpack.rules.cjs");
+import type { Configuration } from "webpack";
+import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
+import type { Argv } from "webpack-cli";
 
 const commonPluginsFactory = () => [htmlWebpackPlugin()];
 
@@ -26,20 +31,16 @@ const prodPluginsFactory = () => [
     webpackBarPlugin(),
 ];
 
-/**
- * @param {Partial<Record<string, string|boolean>>} env
- * @param {import('webpack-cli').Argv} argv
- * @typedef {import('webpack').Configuration} Configuration
- * @typedef {import('webpack-dev-server').Configuration} DevServerConfiguration
- * @returns {Configuration & DevServerConfiguration}
- * */
-module.exports = (env, argv) => {
+export default (
+    env: NodeJS.ProcessEnv,
+    argv: Argv
+): Configuration & DevServerConfiguration => {
     const isDevelopment = argv.mode !== "production";
     const rules = makeRules(isDevelopment);
     const { jsTs, css, sass, cssModule, sassModule, assets } = rules;
 
     return {
-        entry: "./src/index.tsx",
+        entry: path.join(process.cwd(), "src", "index.tsx"),
 
         output: {
             path: path.resolve("dist"),
@@ -48,7 +49,8 @@ module.exports = (env, argv) => {
         },
 
         resolve: {
-            modules: ["node_modules", path.join(__dirname, "src")],
+            modules: ["node_modules", path.join(process.cwd(), "src")],
+            plugins: [tsconfigPathsWebpackPlugin()],
         },
 
         mode: isDevelopment ? "development" : "production",

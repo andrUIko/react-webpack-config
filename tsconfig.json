@@ -1,7 +1,3 @@
 {
-    "extends": [
-        "./configs/typescript/tsconfig.config.json",
-        "./configs/typescript/tsconfig.test.json",
-        "./configs/typescript/tsconfig.app.json"
-    ]
+    "extends": "./configs/typescript/tsconfig-dev.json"
 }

@@ -14,7 +14,7 @@ const presetReactOpts = {
     development: isDevelopment || isTest,
 };
 
-module.exports = {
+export default {
     presets: [
         ["@babel/preset-env", presetEnvOpts],
         ["@babel/preset-react", presetReactOpts],

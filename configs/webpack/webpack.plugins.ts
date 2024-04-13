@@ -1,16 +1,16 @@
-const CompressionPlugin = require("compression-webpack-plugin");
-const zlib = require("zlib");
-const HTMLWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const WebpackBar = require("webpackbar");
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
-const BundleAnalyzerPlugin =
-    require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-const path = require("node:path");
+import CompressionPlugin from "compression-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import zlib from "zlib";
+import HTMLWebpackPlugin from "html-webpack-plugin";
+import WebpackBar from "webpackbar";
+import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
+import path from "node:path";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
+import TsconfigPathsWebpackPlugin from "tsconfig-paths-webpack-plugin";
 
 const compressionPlugin = () =>
-    new CompressionPlugin({
+    new CompressionPlugin<zlib.BrotliOptions>({
         filename: "[path][base].br",
         algorithm: "brotliCompress",
         test: /\.(js|css|html|svg)$/,
@@ -53,12 +53,20 @@ const bundleAnalyzerPlugin = () =>
 
 const htmlWebpackPlugin = () =>
     new HTMLWebpackPlugin({
-        template: path.resolve(__dirname, "public/template.html"),
+        template: path.resolve(process.cwd(), "public", "template.html"),
         filename: "index.html",
         inject: "body",
     });
 
-module.exports = {
+const tsconfigPathsWebpackPlugin = () => {
+    const configFile = path.resolve(process.cwd(), "tsconfig.json");
+
+    return new TsconfigPathsWebpackPlugin({
+        configFile,
+    });
+};
+
+export {
     compressionPlugin,
     miniCssExtractPlugin,
     webpackBarPlugin,
@@ -66,4 +74,5 @@ module.exports = {
     reactRefreshWebpackPlugin,
     bundleAnalyzerPlugin,
     htmlWebpackPlugin,
+    tsconfigPathsWebpackPlugin,
 };

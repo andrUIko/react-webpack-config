@@ -1,0 +1,10 @@
+{
+    "extends": "./typescript/tsconfig-base.json",
+    "compilerOptions": {
+        "lib": ["es2022"],
+        "types": ["node"],
+        "module": "CommonJS"
+    },
+    "include": ["./webpack/**/*", "./typescript/types/**/*"],
+    "files": ["jest.config.ts", "babel.config.js"]
+}

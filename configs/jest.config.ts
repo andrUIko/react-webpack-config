@@ -1,13 +1,14 @@
 import path from "node:path";
-import { JestConfigWithTsJest } from "ts-jest";
-import { defaults } from "ts-jest/presets";
+import babelConfig from "./babel.config.js";
+import type { JestConfigWithTsJest } from "ts-jest";
 
-const config = {
+const config: JestConfigWithTsJest = {
     testEnvironment: "jsdom",
     moduleNameMapper: {
         "\\.(css|sass|scss)$": "identity-obj-proxy",
     },
     rootDir: "../",
+    injectGlobals: true,
     prettierPath: require.resolve("prettier-2"),
     moduleDirectories: [
         "node_modules",
@@ -15,8 +16,13 @@ const config = {
         path.join(process.cwd(), "test"),
     ],
     transform: {
-        ...defaults.transform,
+        "^.+\\.tsx?$": [
+            "ts-jest",
+            {
+                babelConfig,
+            },
+        ],
     },
-} satisfies JestConfigWithTsJest;
+};
 
 export default config;

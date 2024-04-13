@@ -1,4 +1,5 @@
 #!/bin/bash
 
-./scripts/fix_jest.sh && \
-npx jest --config ./configs/jest.config.ts
+NODE_ENV=test \
+TS_NODE_PROJECT=$(pwd)/configs/tsconfig.json \
+jest --config $(pwd)/configs/jest.config.ts

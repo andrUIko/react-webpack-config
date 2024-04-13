@@ -1,7 +1,8 @@
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const path = require("node:path");
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import path from "node:path";
+import { RuleSetRule } from "webpack";
 
-const cssRules = (isDevelopment) => ({
+const cssRules = (isDevelopment: boolean): RuleSetRule => ({
     test: /\.css$/,
     exclude: /\.module\.css$/,
     use: [
@@ -19,7 +20,7 @@ const cssRules = (isDevelopment) => ({
     ],
 });
 
-const sassRules = (isDevelopment) => ({
+const sassRules = (isDevelopment: boolean): RuleSetRule => ({
     test: /\.s[ac]ss$/i,
     exclude: /\.module\.s[ac]ss$/,
     use: [
@@ -41,7 +42,7 @@ const sassRules = (isDevelopment) => ({
     ],
 });
 
-const cssModuleRules = (isDevelopment) => ({
+const cssModuleRules = (isDevelopment: boolean): RuleSetRule => ({
     test: /\.module\.css$/,
     use: [
         {
@@ -61,7 +62,7 @@ const cssModuleRules = (isDevelopment) => ({
     ],
 });
 
-const sassModuleRules = (isDevelopment) => ({
+const sassModuleRules = (isDevelopment: boolean): RuleSetRule => ({
     test: /\.module\.s[ac]ss$/i,
     use: [
         {
@@ -85,14 +86,18 @@ const sassModuleRules = (isDevelopment) => ({
     ],
 });
 
-const jsTsRules = (isDevelopment) => ({
+const jsTsRules = (isDevelopment: boolean): RuleSetRule => ({
     test: /\.(js|jsx|ts|tsx)$/,
     exclude: /node_modules/,
     use: [
         {
             loader: require.resolve("babel-loader"),
             options: {
-                configFile: path.join(__dirname, "configs", "babel.config.cjs"),
+                configFile: path.join(
+                    process.cwd(),
+                    "configs",
+                    "babel.config.js"
+                ),
                 sourceMap: isDevelopment,
                 plugins: isDevelopment
                     ? [require.resolve("react-refresh/babel")]
@@ -110,7 +115,7 @@ const assetsRules = () => ({
     },
 });
 
-module.exports = (isDevelopment) => ({
+export default (isDevelopment: boolean) => ({
     css: cssRules(isDevelopment),
     sass: sassRules(isDevelopment),
     cssModule: cssModuleRules(isDevelopment),

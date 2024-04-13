@@ -1,8 +1,6 @@
 {
     "$schema": "https://json.schemastore.org/tsconfig",
     "compilerOptions": {
-        "baseUrl": "../../",
-
         /* Base options */
         "esModuleInterop": true,
         "skipLibCheck": true,
@@ -33,23 +31,7 @@
         "module": "Preserve",
         "noEmit": true,
 
-        "lib": ["es2022", "dom", "dom.iterable"],
-
-        "jsx": "react",
-
         /* superseded by .eslintrc.cjs */
-        "allowImportingTsExtensions": true,
-
-        "paths": {
-            "*": ["src/*", "test/*"]
-        },
-        "plugins": [
-            {
-                "name": "typescript-plugin-css-modules",
-                "options": {
-                    "classnameTransform": "camelCaseOnly"
-                }
-            }
-        ]
+        "allowImportingTsExtensions": true
     }
 }
