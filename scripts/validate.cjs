@@ -17,9 +17,12 @@ const { result } = concurrently(commands, {
 });
 
 let isErr = false;
+let isKilled = false;
 
 result
     .then((res) => {
+        const killedStatuses = res.map(({ killed }) => killed);
+        isKilled = killedStatuses.some(true);
         printExecutionResults(res);
     })
     .catch((err) => {
@@ -27,9 +30,10 @@ result
         printExecutionResults(err);
     })
     .finally(() => {
-        if (isErr) {
+        if (isErr || isKilled) {
             process.exit(1);
         }
+
         const test = sync("npm", ["run", "test"], { stdio: "inherit" });
         if (test.status !== 0) {
             process.exit(test.status);
