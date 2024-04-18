@@ -1,4 +1,4 @@
-const { spawn } = require("child_process");
+const { spawn } = require("cross-spawn");
 const path = require("path");
 
 const tsNodeProject = path.join(process.cwd(), "configs", "tsconfig.json");

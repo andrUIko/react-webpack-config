@@ -1,5 +1,5 @@
 const concurrently = require("concurrently");
-const { spawnSync } = require("node:child_process");
+const { sync } = require("cross-spawn");
 const Table = require("cli-table3");
 
 const commands = [
@@ -30,11 +30,11 @@ result
         if (isErr) {
             process.exit(1);
         }
-        const test = spawnSync("npm", ["run", "test"], { stdio: "inherit" });
+        const test = sync("npm", ["run", "test"], { stdio: "inherit" });
         if (test.status !== 0) {
             process.exit(test.status);
         }
-        const build = spawnSync("npm", ["run", "build"], { stdio: "inherit" });
+        const build = sync("npm", ["run", "build"], { stdio: "inherit" });
         if (build.status !== 0) {
             process.exit(build.status);
         }
