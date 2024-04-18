@@ -7,6 +7,7 @@ const config: JestConfigWithTsJest = {
     moduleNameMapper: {
         "\\.(css|sass|scss)$": "identity-obj-proxy",
     },
+    modulePathIgnorePatterns: ["<rootDir>/scripts/"],
     rootDir: "../",
     injectGlobals: true,
     prettierPath: require.resolve("prettier-2"),

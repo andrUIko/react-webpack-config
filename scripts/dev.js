@@ -9,13 +9,13 @@ const webpackConfig = path.join(
     "webpack.config.ts"
 );
 
-const command = "webpack";
-const args = ["--mode=production", `--config=${webpackConfig}`];
+const command = "webpack-dev-server";
+const args = ["--mode=development", `--config=${webpackConfig}`];
 
 const env = {
     ...process.env,
     TS_NODE_PROJECT: tsNodeProject,
-    NODE_ENV: "production",
+    NODE_ENV: "development",
 };
 
 const child = spawn(command, args, {
