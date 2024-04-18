@@ -2,15 +2,20 @@ const { spawn } = require("node:child_process");
 const path = require("node:path");
 
 const tsNodeProject = path.join(process.cwd(), "configs", "tsconfig.json");
-const jestConfig = path.join(process.cwd(), "configs", "jest.config.ts");
+const webpackConfig = path.join(
+    process.cwd(),
+    "configs",
+    "webpack",
+    "webpack.config.ts"
+);
 
-const command = "jest";
-const args = [`--config=${jestConfig}`, ...process.argv.slice(2)];
+const command = "webpack-dev-server";
+const args = ["--mode=development", `--config=${webpackConfig}`];
 
 const env = {
     ...process.env,
     TS_NODE_PROJECT: tsNodeProject,
-    NODE_ENV: "test",
+    NODE_ENV: "development",
 };
 
 const child = spawn(command, args, {
@@ -18,6 +23,4 @@ const child = spawn(command, args, {
     stdio: "inherit",
 });
 
-child.on("exit", (code) => {
-    process.exit(code);
-});
+child.on("exit", process.exit);

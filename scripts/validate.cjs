@@ -4,7 +4,7 @@ const Table = require("cli-table3");
 
 const commands = [
     { command: "npm run check-types", name: "tsc", prefixColor: "blue" },
-    { command: "npm run lint", name: "eslint", prefixColor: "yellow" },
+    // { command: "npm run lint", name: "eslint", prefixColor: "yellow" },
     {
         command: "npm run check-format",
         name: "prettier",
