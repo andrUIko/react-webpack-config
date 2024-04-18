@@ -1,10 +1,9 @@
-const { spawn } = require("cross-spawn");
-const path = require("path");
+import { $ } from "execa";
+import path from "node:path";
 
 const tsNodeProject = path.join(process.cwd(), "configs", "tsconfig.json");
 const jestConfig = path.join(process.cwd(), "configs", "jest.config.ts");
 
-const command = "node";
 const args = [
     "--inspect-brk",
     "node_modules/jest/bin/jest",
@@ -21,9 +20,9 @@ const env = {
     NODE_ENV: "test",
 };
 
-const child = spawn(command, args, {
-    env: env,
+const $$ = $({
+    env,
     stdio: "inherit",
 });
 
-child.on("exit", process.exit);
+await $$`node ${args}`;
