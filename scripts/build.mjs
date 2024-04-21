@@ -18,4 +18,8 @@ const env = {
 
 const $$ = $({ stdio: "inherit", env });
 
-await $$`webpack --mode=production --config=${paths.webpackConfig}`;
+try {
+    await $$`webpack --mode=production --config=${paths.webpackConfig}`;
+} catch (_e) {
+    process.exit(1);
+}

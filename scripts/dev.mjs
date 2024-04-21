@@ -20,6 +20,8 @@ process.on("SIGINT", () => null);
 
 const $$ = $({ stdio: "inherit", env });
 
-await $$`webpack-dev-server --mode=development --config=${paths.webpackConfig}`;
-
-process.exit();
+try {
+    await $$`webpack-dev-server --mode=development --config=${paths.webpackConfig}`;
+} catch (_e) {
+    process.exit(1);
+}

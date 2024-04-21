@@ -55,6 +55,9 @@ const cssModuleRules = (isDevelopment: boolean): RuleSetRule => ({
             options: {
                 modules: {
                     exportLocalsConvention: "camelCaseOnly",
+                    localIdentName: isDevelopment
+                        ? "[path][name]__[local]--[hash:base64:5]"
+                        : "[hash:base64]",
                 },
                 sourceMap: isDevelopment,
             },
@@ -75,6 +78,9 @@ const sassModuleRules = (isDevelopment: boolean): RuleSetRule => ({
             options: {
                 modules: {
                     exportLocalsConvention: "camelCaseOnly",
+                    localIdentName: isDevelopment
+                        ? "[path][name]__[local]--[hash:base64:5]"
+                        : "[hash:base64]",
                 },
                 sourceMap: isDevelopment,
             },
@@ -115,6 +121,12 @@ const assetsRules = () => ({
     },
 });
 
+const svgRules = () => ({
+    test: /\.svg$/i,
+    issuer: /\.[jt]sx?$/,
+    use: ["@svgr/webpack"],
+});
+
 export default (isDevelopment: boolean) => ({
     css: cssRules(isDevelopment),
     sass: sassRules(isDevelopment),
@@ -122,4 +134,5 @@ export default (isDevelopment: boolean) => ({
     sassModule: sassModuleRules(isDevelopment),
     jsTs: jsTsRules(isDevelopment),
     assets: assetsRules(),
+    svg: svgRules(),
 });

@@ -5,13 +5,14 @@ const isDevelopment = process.env.NODE_ENV === "development";
 const sourceMaps = isProd ? false : "inline";
 
 const presetEnvOpts = {
-    modules: isTest ? "commonjs" : false,
+    modules: isTest ? "commonjs" : "auto",
 };
 
 const presetTypescriptOpts = {};
 
 const presetReactOpts = {
     development: isDevelopment || isTest,
+    runtime: "automatic",
 };
 
 export default {
@@ -22,4 +23,7 @@ export default {
     ],
     sourceMaps,
     plugins: ["@babel/plugin-transform-runtime"],
+    parserOpts: {
+        strictMode: true,
+    },
 };

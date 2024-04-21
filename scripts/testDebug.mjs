@@ -2,7 +2,12 @@ import { $ } from "execa";
 import path from "node:path";
 
 const tsNodeProject = path.join(process.cwd(), "configs", "tsconfig.json");
-const jestConfig = path.join(process.cwd(), "configs", "jest.config.ts");
+const jestConfig = path.join(
+    process.cwd(),
+    "configs",
+    "jest",
+    "jest.config.ts"
+);
 
 const args = [
     "--inspect-brk",
@@ -25,4 +30,8 @@ const $$ = $({
     stdio: "inherit",
 });
 
-await $$`node ${args}`;
+try {
+    await $$`node ${args}`;
+} catch (_e) {
+    process.exit(1);
+}

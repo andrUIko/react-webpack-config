@@ -3,7 +3,7 @@ import path from "node:path";
 
 const paths = {
     tsConfig: path.join(process.cwd(), "configs", "tsconfig.json"),
-    jestConfig: path.join(process.cwd(), "configs", "jest.config.ts"),
+    jestConfig: path.join(process.cwd(), "configs", "jest", "jest.config.ts"),
 };
 
 const args = process.argv.slice(2).join(" ");
@@ -14,4 +14,8 @@ const env = {
 
 const $$ = $({ stdio: "inherit", env });
 
-await $$`jest --config=${paths.jestConfig} ${args}`;
+try {
+    await $$`jest --config=${paths.jestConfig} ${args}`;
+} catch (_e) {
+    process.exit(1);
+}

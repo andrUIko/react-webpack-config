@@ -1,4 +1,8 @@
 {
     // "*.+(js|jsx|ts|tsx|cjs)": ["eslint"],
-    "**/*.+(js|json|jsx|ts|tsx|cjs)": ["prettier --write", "git add ."]
+    "**/*.+(js|json|jsx|ts|tsx|cjs)": [
+        "prettier --write",
+        "node ./scripts/test.mjs --findRelatedTests",
+        "git add ."
+    ]
 }

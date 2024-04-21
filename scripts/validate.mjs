@@ -15,7 +15,7 @@ const args = [
 
 try {
     await $$`concurrently ${args}`;
-    await $$`npm run test`;
+    await $$`npm run test:coverage`;
     await $$`npm run build`;
 } catch (_e) {
     process.exit(1);

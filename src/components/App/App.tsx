@@ -9,6 +9,7 @@ const Button = lazy(() => import("components/Button/Button.tsx"));
 
 const App: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
+
     const handleClick = () => {
         setIsOpen(!isOpen);
     };
