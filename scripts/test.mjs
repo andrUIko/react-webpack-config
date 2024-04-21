@@ -6,7 +6,7 @@ const paths = {
     jestConfig: path.join(process.cwd(), "configs", "jest", "jest.config.ts"),
 };
 
-const args = process.argv.slice(2).join(" ");
+const args = [`--config=${paths.jestConfig}`, ...process.argv.slice(2)];
 
 const env = {
     TS_NODE_PROJECT: paths.tsConfig,
@@ -15,7 +15,7 @@ const env = {
 const $$ = $({ stdio: "inherit", env });
 
 try {
-    await $$`jest --config=${paths.jestConfig} ${args}`;
+    await $$`jest ${args}`;
 } catch (_e) {
     process.exit(1);
 }
