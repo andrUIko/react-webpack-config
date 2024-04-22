@@ -4,6 +4,10 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import * as rtl from "@testing-library/react";
 import type { Theme } from "@mui/material";
 import { darkTheme } from "styles/themes.tsx";
+import "@testing-library/jest-dom";
+import { toHaveNoViolations } from "jest-axe";
+
+expect.extend(toHaveNoViolations);
 
 interface WrapperProps {
     children: React.ReactNode;
