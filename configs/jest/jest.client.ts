@@ -6,6 +6,9 @@ const config: JestConfigWithTsJest = {
     ...commonConfig,
     displayName: "client",
     testEnvironment: "jsdom",
+    testEnvironmentOptions: {
+        customExportConditions: [""],
+    },
 };
 
 export default config;

@@ -1,32 +1,40 @@
-const sleep = (time: number) =>
-    new Promise((resolve) => {
-        setTimeout(resolve, time);
+function client(
+    endpoint: string,
+    {
+        data,
+        token,
+        headers: customHeaders,
+        ...customConfig
+    }: RequestInit & { data?: any; token?: string } = {}
+) {
+    const config = {
+        method: data ? "POST" : "GET",
+        body: data ? JSON.stringify(data) : undefined,
+        headers: {
+            ...(token && { Authorization: `Bearer ${token}` }),
+            ...(data && { "Content-Type": "application/json" }),
+            ...customHeaders,
+        },
+        ...customConfig,
+    };
+
+    return fetch(`/${endpoint}`, config).then(async (response) => {
+        const responseData: any = await response.json();
+
+        if (response.ok) {
+            return responseData;
+        } else {
+            return Promise.reject(responseData);
+        }
     });
-
-async function savePost(postData: any) {
-    await sleep(1000);
-    return { data: { post: postData } };
 }
 
-const greetings = ["Hello", "Hi", "Hey there", `What's up`, "Howdy", `G'day`];
-
-async function loadGreeting(subject: string) {
-    return { data: { greeting: `${await fetchRandomGreeting()} ${subject}` } };
-}
-
-async function fetchRandomGreeting() {
-    await sleep(1000);
-    return greetings[Math.floor(Math.random() * greetings.length)];
-}
-
-async function reportError() {
-    await sleep(1000);
-    return { success: true };
-}
-
-async function submitForm() {
-    await sleep(1000);
-    return { success: true };
-}
+const savePost = (postData: any) =>
+    client(`post/${postData.id}`, { data: postData });
+const loadGreeting = (subject: string) =>
+    client(`greeting`, { data: { subject } });
+const reportError = (data: any, info?: React.ErrorInfo) =>
+    client(`error`, { data });
+const submitForm = (data: any) => client(`form`, { data });
 
 export { savePost, loadGreeting, reportError, submitForm };

@@ -6,6 +6,10 @@ import type { Theme } from "@mui/material";
 import { darkTheme } from "styles/themes.tsx";
 import "@testing-library/jest-dom";
 import { toHaveNoViolations } from "jest-axe";
+import { TextEncoder } from "util";
+import "whatwg-fetch";
+
+global.TextEncoder = TextEncoder;
 
 expect.extend(toHaveNoViolations);
 

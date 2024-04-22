@@ -3,6 +3,7 @@ import { loadGreeting } from "../api.ts";
 
 function GreetingLoader() {
     const [greeting, setGreeting] = React.useState("");
+
     async function loadGreetingForInput(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
