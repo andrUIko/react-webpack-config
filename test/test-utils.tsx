@@ -36,15 +36,11 @@ export const render = (
         const router = createBrowserRouter([
             {
                 path: path ?? "/",
-                element: <TestComponent />,
+                element: <></>,
             },
         ]);
 
-        return (
-            <StrictMode>
-                <RouterProvider router={router} />
-            </StrictMode>
-        );
+        return <TestComponent />;
     };
     return rtl.render(ui, { wrapper: Wrapper, ...options });
 };

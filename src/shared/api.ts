@@ -17,7 +17,6 @@ function client(
         },
         ...customConfig,
     };
-
     return fetch(`/${endpoint}`, config).then(async (response) => {
         const responseData: any = await response.json();
 

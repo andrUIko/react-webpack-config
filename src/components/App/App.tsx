@@ -1,11 +1,11 @@
 import styles from "./App.module.scss";
-import React, { useState, Suspense, lazy } from "react";
+import React, { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { darkTheme } from "styles/themes.tsx";
 import Body from "components/Body/Body.tsx";
-
-const Button = lazy(() => import("components/Button/Button.tsx"));
+import { Link, Outlet } from "react-router-dom";
+import Button from "components/Button/Button.tsx";
 
 const App: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -18,11 +18,12 @@ const App: React.FC = () => {
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
             <div className={styles.container}>
-                <Suspense fallback={<div>Loading...</div>}>
-                    <Button onClick={handleClick}>Click</Button>
-                </Suspense>
+                <Button onClick={handleClick}>Click</Button>
                 {isOpen && <Body />}
             </div>
+            <Link to={"/"}>Home</Link>
+            <Link to={"/about"}>About</Link>
+            <Outlet />
         </ThemeProvider>
     );
 };

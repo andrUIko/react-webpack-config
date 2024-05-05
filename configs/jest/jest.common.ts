@@ -23,6 +23,7 @@ const config: JestConfigWithTsJest = {
             },
         ],
     },
+    silent: false,
     collectCoverageFrom: ["<rootDir>/src/**/*.{ts,tsx,js,jsx}"],
     coverageThreshold: {
         global: {
