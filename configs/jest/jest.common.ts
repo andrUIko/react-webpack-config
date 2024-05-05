@@ -1,13 +1,11 @@
 import path from "node:path";
 import { JestConfigWithTsJest } from "ts-jest";
-import babelConfig from "../babel.config.js";
 
 const config: JestConfigWithTsJest = {
-    moduleNameMapper: {
-        "\\.(css|sass|scss)$": "identity-obj-proxy",
-    },
+    moduleNameMapper: { "\\.(css|sass|scss)$": "identity-obj-proxy" },
     modulePathIgnorePatterns: ["<rootDir>/scripts/"],
     rootDir: "../..",
+    preset: "ts-jest/presets/default-esm",
     injectGlobals: true,
     prettierPath: require.resolve("prettier-2"),
     moduleDirectories: [
@@ -15,14 +13,6 @@ const config: JestConfigWithTsJest = {
         path.join(process.cwd(), "src"),
         path.join(process.cwd(), "test"),
     ],
-    transform: {
-        "^.+\\.tsx?$": [
-            "ts-jest",
-            {
-                babelConfig,
-            },
-        ],
-    },
     silent: false,
     collectCoverageFrom: ["<rootDir>/src/**/*.{ts,tsx,js,jsx}"],
     coverageThreshold: {

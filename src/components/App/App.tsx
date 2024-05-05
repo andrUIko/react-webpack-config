@@ -5,7 +5,9 @@ import { ThemeProvider } from "@mui/material/styles";
 import { darkTheme } from "styles/themes.tsx";
 import Body from "components/Body/Body.tsx";
 import { Link, Outlet } from "react-router-dom";
-import Button from "components/Button/Button.tsx";
+import { lazyLoad } from "utils/componentLoaders.tsx";
+
+const Button = lazyLoad(() => import("components/Button/Button.tsx"));
 
 const App: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
