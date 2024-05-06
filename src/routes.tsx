@@ -1,28 +1,13 @@
+import React from "react";
 import { About, Home, NotFound } from "pages/index.tsx";
-import { RouteObject } from "react-router-dom";
-import { loadRoute } from "utils/componentLoaders.tsx";
+import { Route, Routes } from "react-router-dom";
 
-const AppModule = import("components/App/App.tsx");
-
-const routes: RouteObject[] = [
-    {
-        path: "/",
-        lazy: loadRoute(() => AppModule),
-        children: [
-            {
-                path: "",
-                lazy: Home,
-            },
-            {
-                path: "/about",
-                lazy: About,
-            },
-            {
-                path: "*",
-                lazy: NotFound,
-            },
-        ],
-    },
-];
+const routes = (
+    <Routes>
+        <Route index element={<Home name="World" />} />
+        <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
+    </Routes>
+);
 
 export { routes };

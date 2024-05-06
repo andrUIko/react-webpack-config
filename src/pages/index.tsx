@@ -1,5 +1,5 @@
-import { loadRoute } from "utils/componentLoaders.tsx";
+import { lazyLoad } from "utils/componentLoaders.tsx";
 
-export const Home = loadRoute(() => import("./Home/Home.tsx"));
-export const About = loadRoute(() => import("./About/About.tsx"));
-export const NotFound = loadRoute(() => import("./NotFound/NotFound.tsx"));
+export const Home = lazyLoad(() => import("./Home/Home.tsx"));
+export const About = lazyLoad(() => import("./About/About.tsx"));
+export const NotFound = lazyLoad(() => import("./NotFound/NotFound.tsx"));

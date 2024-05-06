@@ -3,10 +3,6 @@ import { render } from "test-utils.tsx";
 import React from "react";
 
 test("renders", () => {
-    const {
-        // debug,
-        getAllByTestId,
-    } = render(<AutoScalingText>Hello</AutoScalingText>);
-    // debug();
+    const { getAllByTestId } = render(<AutoScalingText>Hello</AutoScalingText>);
     expect(getAllByTestId("total")).toHaveLength(1);
 });

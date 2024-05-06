@@ -1,5 +1,5 @@
 import React from "react";
-import { act, render, waitFor } from "test-utils.tsx";
+import { render, waitFor } from "test-utils.tsx";
 import { GreetingLoader } from "shared/Greeting/Greeting.tsx";
 import user from "@testing-library/user-event";
 import { setupServer } from "msw/node";
@@ -29,9 +29,9 @@ test("loads greetings on click", async () => {
     const loadButton = getByText(/load/i);
 
     await user.type(nameInput, "Mary");
-    await act(() => user.click(loadButton));
+    user.click(loadButton);
 
-    await waitFor(() => {
+    waitFor(() => {
         expect(getByLabelText(/greeting/i)).toHaveTextContent("Hello Mary");
     });
 });

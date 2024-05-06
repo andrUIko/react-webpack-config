@@ -1,13 +1,13 @@
 import React from "react";
 
 interface HomeProps {
-    // name: string;
+    name: string;
 }
 
-const Home: React.FC<HomeProps> = () => {
+const Home: React.FC<HomeProps> = ({ name }) => {
     return (
         <div>
-            <h1>Hello World</h1>
+            <h1>Hello, {name}</h1>
             <p>You are home</p>
         </div>
     );

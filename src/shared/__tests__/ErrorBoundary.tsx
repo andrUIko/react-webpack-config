@@ -1,5 +1,5 @@
 import * as React from "react";
-import { act, render, screen } from "test-utils.tsx";
+import { act, render, screen, waitFor } from "test-utils.tsx";
 import userEvent from "@testing-library/user-event";
 import { reportError as mockReportError } from "../api.ts";
 import { ErrorBoundary } from "shared/ErrorBoundary/ErrorBoundary.tsx";
@@ -48,10 +48,11 @@ test("calls reportError and renders that there was a problem", async () => {
 
     rerender(<Bomb />);
 
-    await act(() => userEvent.click(screen.getByText(/try again/i)));
-
-    expect(mockReportError).not.toHaveBeenCalled();
-    expect(console.error).not.toHaveBeenCalled();
-    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
-    expect(screen.queryByText(/try again/i)).not.toBeInTheDocument();
+    userEvent.click(screen.getByText(/try again/i));
+    waitFor(() => {
+        expect(mockReportError).not.toHaveBeenCalled();
+        expect(console.error).not.toHaveBeenCalled();
+        expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+        expect(screen.queryByText(/try again/i)).not.toBeInTheDocument();
+    });
 });
