@@ -24,14 +24,16 @@ afterAll(() => server.close());
 beforeEach(() => server.resetHandlers());
 
 test("loads greetings on click", async () => {
-    const { getByLabelText, getByText, debug } = render(<GreetingLoader />);
-    const nameInput = getByLabelText(/name/i) as HTMLInputElement;
-    const loadButton = getByText(/load/i);
+    const { findByLabelText, findByText } = render(<GreetingLoader />);
+    const nameInput = (await findByLabelText(/name/i)) as HTMLInputElement;
+    const loadButton = await findByText(/load/i);
 
     await user.type(nameInput, "Mary");
     user.click(loadButton);
 
-    waitFor(() => {
-        expect(getByLabelText(/greeting/i)).toHaveTextContent("Hello Mary");
+    waitFor(async () => {
+        expect(await findByLabelText(/greeting/i)).toHaveTextContent(
+            "Hello Mary"
+        );
     });
 });

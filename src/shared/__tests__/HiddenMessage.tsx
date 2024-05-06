@@ -1,7 +1,7 @@
 import React from "react";
 import { HiddenMessage } from "shared/HiddenMessage/HiddenMessage.tsx";
 import userEvent from "@testing-library/user-event";
-import { act, render, screen } from "test-utils.tsx";
+import { render, waitFor } from "test-utils.tsx";
 import { CSSTransitionProps } from "react-transition-group/CSSTransition";
 
 jest.mock("react-transition-group", () => {
@@ -13,11 +13,15 @@ jest.mock("react-transition-group", () => {
 
 test("shows hidden message when toggle is clicked", async () => {
     const myMessage = "hello world";
-    render(<HiddenMessage>{myMessage}</HiddenMessage>);
-    const toggleButton = screen.getByText(/toggle/i);
-    expect(screen.queryByText(myMessage)).not.toBeInTheDocument();
-    await act(() => userEvent.click(toggleButton));
-    expect(screen.getByText(myMessage)).toBeInTheDocument();
-    await act(() => userEvent.click(toggleButton));
-    expect(screen.queryByText(myMessage)).not.toBeInTheDocument();
+    const { findByText, queryByText } = render(
+        <HiddenMessage>{myMessage}</HiddenMessage>
+    );
+    const toggleButton = await findByText(/toggle/i);
+    expect(queryByText(myMessage)).not.toBeInTheDocument();
+    userEvent.click(toggleButton);
+    waitFor(async () =>
+        expect(await findByText(myMessage)).toBeInTheDocument()
+    );
+    userEvent.click(toggleButton);
+    waitFor(async () => expect(queryByText(myMessage)).not.toBeInTheDocument());
 });

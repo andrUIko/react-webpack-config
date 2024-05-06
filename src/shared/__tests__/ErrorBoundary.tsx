@@ -1,5 +1,5 @@
 import * as React from "react";
-import { act, render, screen, waitFor } from "test-utils.tsx";
+import { render, screen, waitFor } from "test-utils.tsx";
 import userEvent from "@testing-library/user-event";
 import { reportError as mockReportError } from "../api.ts";
 import { ErrorBoundary } from "shared/ErrorBoundary/ErrorBoundary.tsx";
@@ -28,7 +28,9 @@ function Bomb({ shouldThrow }: { shouldThrow?: boolean }) {
 
 test("calls reportError and renders that there was a problem", async () => {
     (mockReportError as jest.Mock).mockResolvedValueOnce({ success: true });
-    const { rerender } = render(<Bomb />, { wrapper: ErrorBoundary });
+    const { rerender, findByRole, findByText } = render(<Bomb />, {
+        wrapper: ErrorBoundary,
+    });
 
     rerender(<Bomb shouldThrow />);
 
@@ -39,7 +41,7 @@ test("calls reportError and renders that there was a problem", async () => {
 
     expect(console.error).toHaveBeenCalledTimes(3);
 
-    expect(screen.getByRole("alert").textContent).toMatchInlineSnapshot(
+    expect((await findByRole("alert")).textContent).toMatchInlineSnapshot(
         `"There was a problem."`
     );
 
@@ -48,7 +50,7 @@ test("calls reportError and renders that there was a problem", async () => {
 
     rerender(<Bomb />);
 
-    userEvent.click(screen.getByText(/try again/i));
+    userEvent.click(await findByText(/try again/i));
     waitFor(() => {
         expect(mockReportError).not.toHaveBeenCalled();
         expect(console.error).not.toHaveBeenCalled();

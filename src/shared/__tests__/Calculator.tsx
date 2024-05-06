@@ -4,11 +4,11 @@ import Calculator from "shared/Calculator/Calculator.tsx";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 
-test("the clear button switches from AC to C when there is an entry", () => {
-    const { getByText } = render(<Calculator />);
-    const clearButton = getByText("AC");
+test("the clear button switches from AC to C when there is an entry", async () => {
+    const { findByText } = render(<Calculator />);
+    const clearButton = await findByText("AC");
 
-    userEvent.click(getByText(/3/));
+    userEvent.click(await findByText(/3/));
     expect(clearButton).toHaveTextContent("C");
 
     userEvent.click(clearButton);

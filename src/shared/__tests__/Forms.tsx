@@ -1,7 +1,7 @@
 import React from "react";
 import { axe } from "jest-axe";
 import { AccessibleForm } from "shared/Forms/Forms.tsx";
-import { act, render } from "test-utils.tsx";
+import { act, render, waitFor } from "test-utils.tsx";
 import userEvent from "@testing-library/user-event";
 import { savePost } from "../api";
 import { redirect } from "react-router-dom";
@@ -40,15 +40,17 @@ test("accessible forms pass axe", async () => {
     expect(await axe(container)).toHaveNoViolations();
 });
 
-const renderFunction = () => {
+const renderFunction = async () => {
     const fakeUser = userBuilder();
     const fakePost = postBuilder();
-    const utils = render(<AccessibleForm user={fakeUser} />);
+    const { findByLabelText, findByText, ...utils } = render(
+        <AccessibleForm user={fakeUser} />
+    );
 
-    const title = utils.getByLabelText(/title/i);
-    const content = utils.getByLabelText(/content/i);
-    const tags = utils.getByLabelText(/tags/i);
-    const submitButton = utils.getByText(/submit/i);
+    const title = await findByLabelText(/title/i);
+    const content = await findByLabelText(/content/i);
+    const tags = await findByLabelText(/tags/i);
+    const submitButton = await findByText(/submit/i);
 
     if (title instanceof HTMLInputElement) {
         title.value = fakePost.title;
@@ -62,6 +64,8 @@ const renderFunction = () => {
 
     return {
         ...utils,
+        findByText,
+        findByLabelText,
         title,
         content,
         tags,
@@ -74,7 +78,7 @@ const renderFunction = () => {
 test("renders a form with title, content, tags, and a submit button", async () => {
     mockSavePost.mockResolvedValueOnce({});
 
-    const { submitButton, fakePost, fakeUser } = renderFunction();
+    const { submitButton, fakePost, fakeUser } = await renderFunction();
 
     const preDate = +new Date();
     await act(() => userEvent.click(submitButton));
@@ -102,10 +106,11 @@ test("renders an error message from the server", async () => {
 
     mockSavePost.mockRejectedValueOnce({ data: { error: TEST_ERROR } });
 
-    const { findByRole, getByText } = renderFunction();
-    const submitButton = getByText(/submit/i);
-    await act(() => userEvent.click(submitButton));
-    const postError = await findByRole("alert");
-    expect(postError).toHaveTextContent(TEST_ERROR);
-    expect(submitButton).not.toBeDisabled();
+    const { findByRole, findByText } = await renderFunction();
+    const submitButton = await findByText(/submit/i);
+    userEvent.click(submitButton);
+    waitFor(async () => {
+        expect(await findByRole("alert")).toHaveTextContent(TEST_ERROR);
+        expect(submitButton).not.toBeDisabled();
+    });
 });
