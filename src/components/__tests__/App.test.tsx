@@ -1,4 +1,3 @@
-import React from "react";
 import { render, waitFor } from "test-utils.tsx";
 import userEvent from "@testing-library/user-event";
 import App from "components/App/App.tsx";

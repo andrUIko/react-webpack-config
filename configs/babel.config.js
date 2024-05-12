@@ -5,7 +5,7 @@ const isDevelopment = process.env.NODE_ENV === "development";
 const sourceMaps = isProd ? false : "inline";
 
 const presetEnvOpts = {
-    modules: isTest ? "commonjs" : "auto",
+    modules: isTest ? "commonjs" : false,
 };
 
 const presetTypescriptOpts = {};

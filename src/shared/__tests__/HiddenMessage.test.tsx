@@ -1,4 +1,3 @@
-import React from "react";
 import { HiddenMessage } from "shared/HiddenMessage/HiddenMessage.tsx";
 import userEvent from "@testing-library/user-event";
 import { render, waitFor } from "test-utils.tsx";

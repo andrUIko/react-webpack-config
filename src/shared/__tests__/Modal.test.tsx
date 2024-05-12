@@ -1,4 +1,3 @@
-import React from "react";
 import { Modal } from "shared/Modal/Modal.tsx";
 import { render, within } from "test-utils.tsx";
 

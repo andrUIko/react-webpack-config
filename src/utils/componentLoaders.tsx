@@ -1,4 +1,4 @@
-import React, { ComponentType, lazy, Suspense } from "react";
+import { ComponentType, lazy, Suspense } from "react";
 
 export function lazyLoad<P extends {}>(
     moduleImporter: () => Promise<{ default: ComponentType<P> }>,

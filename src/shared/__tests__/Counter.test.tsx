@@ -1,4 +1,3 @@
-import React from "react";
 import userEvent from "@testing-library/user-event";
 import { Counter } from "shared/Counter/Counter.tsx";
 import { render, waitFor } from "test-utils.tsx";

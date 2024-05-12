@@ -1,6 +1,6 @@
-import * as React from "react";
 import { CSSTransitionProps } from "react-transition-group/CSSTransition";
 import { CSSTransition } from "react-transition-group";
+import { useState } from "react";
 
 function Fade(props: Partial<CSSTransitionProps>) {
     return (
@@ -14,7 +14,7 @@ function Fade(props: Partial<CSSTransitionProps>) {
 }
 
 function HiddenMessage({ children }: { children: React.ReactNode }) {
-    const [show, setShow] = React.useState(false);
+    const [show, setShow] = useState(false);
     const toggle = () => setShow((s) => !s);
     return (
         <div>

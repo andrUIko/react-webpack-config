@@ -1,6 +1,6 @@
-import React from "react";
 import { savePost } from "shared/api.ts";
 import { redirect as routerRedirect } from "react-router-dom";
+import { useState } from "react";
 
 const validateError = (err: unknown): err is { data: { error: string } } => {
     return (
@@ -13,9 +13,9 @@ const validateError = (err: unknown): err is { data: { error: string } } => {
 };
 
 function AccessibleForm({ user }: { user: { id: string } }) {
-    const [isSaving, setIsSaving] = React.useState(false);
-    const [redirect, setRedirect] = React.useState(false);
-    const [errorMessage, setErrorMessage] = React.useState<string>();
+    const [isSaving, setIsSaving] = useState(false);
+    const [redirect, setRedirect] = useState(false);
+    const [errorMessage, setErrorMessage] = useState<string>();
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();

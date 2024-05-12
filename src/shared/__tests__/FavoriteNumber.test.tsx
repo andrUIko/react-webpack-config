@@ -1,4 +1,3 @@
-import React from "react";
 import { FavoriteNumber } from "shared/FavoriteNumber/FavoriteNumber.tsx";
 import { render, screen, waitFor } from "test-utils.tsx";
 import user from "@testing-library/user-event";

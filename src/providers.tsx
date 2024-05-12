@@ -1,4 +1,3 @@
-import React from "react";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import { darkTheme } from "styles/themes.tsx";
 import { BrowserRouter } from "react-router-dom";

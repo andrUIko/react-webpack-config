@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useReducer } from "react";
+import { Suspense, useEffect, useReducer } from "react";
 import styles from "./Calculator.module.scss";
 import CalculatorDisplay from "shared/CalculatorDisplay/CalculatorDisplay.tsx";
 

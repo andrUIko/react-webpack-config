@@ -1,8 +1,8 @@
-import React from "react";
+import { useState, useEffect } from "react";
 
 function FavoriteNumber({ min = 1, max = 9 }) {
-    const [number, setNumber] = React.useState(0);
-    const [numberEntered, setNumberEntered] = React.useState(false);
+    const [number, setNumber] = useState(0);
+    const [numberEntered, setNumberEntered] = useState(false);
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         setNumber(Number(event.target.value));

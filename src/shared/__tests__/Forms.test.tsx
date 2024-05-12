@@ -1,4 +1,3 @@
-import React from "react";
 import { axe } from "jest-axe";
 import { AccessibleForm } from "shared/Forms/Forms.tsx";
 import { act, render, waitFor } from "test-utils.tsx";

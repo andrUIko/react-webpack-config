@@ -35,7 +35,7 @@ export default (
     env: NodeJS.ProcessEnv,
     argv: Argv
 ): Configuration & DevServerConfiguration => {
-    const isDevelopment = argv.mode !== "production";
+    const isDevelopment = argv?.mode !== "production";
     const rules = makeRules(isDevelopment);
     const { jsTs, css, sass, cssModule, sassModule, assets } = rules;
 

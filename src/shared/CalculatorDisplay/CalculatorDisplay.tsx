@@ -1,6 +1,5 @@
 import { getFormattedValue } from "shared/utils.ts";
 import AutoScalingText from "shared/AutoScalingText/AutoScalingText.tsx";
-import React from "react";
 
 interface CalculatorDisplayProps
     extends React.DetailedHTMLProps<

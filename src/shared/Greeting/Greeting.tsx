@@ -1,8 +1,8 @@
-import React from "react";
+import { useState } from "react";
 import { loadGreeting } from "../api.ts";
 
 function GreetingLoader() {
-    const [greeting, setGreeting] = React.useState("");
+    const [greeting, setGreeting] = useState("");
 
     async function loadGreetingForInput(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();

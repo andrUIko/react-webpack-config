@@ -1,4 +1,3 @@
-import React from "react";
 import { decrement, increment } from "store/counter/counterSlice.ts";
 import { useAppDispatch, useAppSelector } from "store/index.ts";
 

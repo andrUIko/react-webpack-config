@@ -5,7 +5,7 @@ const config: JestConfigWithTsJest = {
     moduleNameMapper: { "\\.(css|sass|scss)$": "identity-obj-proxy" },
     modulePathIgnorePatterns: ["<rootDir>/scripts/"],
     rootDir: "../..",
-    preset: "ts-jest/presets/default-esm",
+    preset: "ts-jest/presets/js-with-ts-esm",
     injectGlobals: true,
     prettierPath: require.resolve("prettier-2"),
     moduleDirectories: [
@@ -13,7 +13,6 @@ const config: JestConfigWithTsJest = {
         path.join(process.cwd(), "src"),
         path.join(process.cwd(), "test"),
     ],
-    silent: false,
     collectCoverageFrom: ["<rootDir>/src/**/*.{ts,tsx,js,jsx}"],
     coverageThreshold: {
         global: {

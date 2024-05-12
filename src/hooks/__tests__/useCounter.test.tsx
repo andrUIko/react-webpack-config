@@ -1,5 +1,5 @@
 import { act, renderHook } from "@testing-library/react";
-import { useCounter } from "shared/hooks/useCounter.ts";
+import { useCounter } from "hooks/useCounter";
 
 test("exposes the count and increment/decrement functions", () => {
     const { result } = renderHook(useCounter);

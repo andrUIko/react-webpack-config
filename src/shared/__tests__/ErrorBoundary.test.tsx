@@ -1,4 +1,3 @@
-import * as React from "react";
 import { render, screen, waitFor } from "test-utils.tsx";
 import userEvent from "@testing-library/user-event";
 import { reportError as mockReportError } from "../api.ts";

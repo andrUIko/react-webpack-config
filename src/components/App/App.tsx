@@ -1,5 +1,5 @@
 import styles from "./App.module.scss";
-import React, { useState } from "react";
+import { useState } from "react";
 import Body from "components/Body/Body.tsx";
 import { Link } from "react-router-dom";
 import { lazyLoad } from "utils/componentLoaders.tsx";

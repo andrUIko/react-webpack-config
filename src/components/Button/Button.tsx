@@ -1,5 +1,4 @@
 import styles from "./Button.module.scss";
-import React from "react";
 
 interface ButtonProps {
     onClick: (e: React.MouseEvent) => void;

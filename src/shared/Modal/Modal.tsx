@@ -1,5 +1,5 @@
-import React from "react";
 import ReactDOM from "react-dom";
+import { useRef, useLayoutEffect } from "react";
 
 let modalRoot = document.getElementById("modal-root");
 if (!modalRoot) {
@@ -9,8 +9,8 @@ if (!modalRoot) {
 }
 
 function Modal({ children }: { children: React.ReactNode }) {
-    const el = React.useRef(document.createElement("div"));
-    React.useLayoutEffect(() => {
+    const el = useRef(document.createElement("div"));
+    useLayoutEffect(() => {
         const currentEl = el.current;
         if (!modalRoot) return;
         modalRoot.appendChild(currentEl);

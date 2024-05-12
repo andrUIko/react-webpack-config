@@ -1,4 +1,3 @@
-import React from "react";
 import { About, Home, NotFound } from "pages/index.tsx";
 import { Route, Routes } from "react-router-dom";
 

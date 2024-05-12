@@ -1,4 +1,3 @@
-import React from "react";
 import { render, waitFor } from "test-utils.tsx";
 import { GreetingLoader } from "shared/Greeting/Greeting.tsx";
 import user from "@testing-library/user-event";

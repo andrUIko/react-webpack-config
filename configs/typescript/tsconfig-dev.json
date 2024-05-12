@@ -7,7 +7,7 @@
             "*": ["src/*", "test/*"]
         },
         "lib": ["es2022", "dom", "dom.iterable"],
-        "jsx": "react"
+        "jsx": "react-jsx"
     },
     "include": ["../../src/**/*", "../../test/**/*", "./types/**/*"]
 }
