@@ -113,7 +113,7 @@ const jsTsRules = (isDevelopment: boolean): RuleSetRule => ({
     ],
 });
 
-const assetsRules = () => ({
+const assetsRules = (_isDevelopment: boolean) => ({
     test: /\.(woff|woff2|eot|ttf|otf)$/i,
     type: "asset/resource",
     generator: {
@@ -121,7 +121,7 @@ const assetsRules = () => ({
     },
 });
 
-const svgRules = () => ({
+const svgRules = (_isDevelopment: boolean) => ({
     test: /\.svg$/i,
     issuer: /\.[jt]sx?$/,
     use: ["@svgr/webpack"],
@@ -133,6 +133,6 @@ export default (isDevelopment: boolean) => ({
     cssModule: cssModuleRules(isDevelopment),
     sassModule: sassModuleRules(isDevelopment),
     jsTs: jsTsRules(isDevelopment),
-    assets: assetsRules(),
-    svg: svgRules(),
+    assets: assetsRules(isDevelopment),
+    svg: svgRules(isDevelopment),
 });

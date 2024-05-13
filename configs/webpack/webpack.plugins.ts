@@ -55,6 +55,7 @@ const htmlWebpackPlugin = () =>
     new HTMLWebpackPlugin({
         template: path.resolve(process.cwd(), "public", "template.html"),
         filename: "index.html",
+        favicon: path.resolve(process.cwd(), "public", "favicon.ico"),
         inject: "body",
     });
 
